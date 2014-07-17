@@ -2,3 +2,106 @@
     ViewBag.Title = "后台首页";
     Layout = "~/Views/Shared/_SystemMainLayot.cshtml";
 }
+@section head{
+    <style>
+        .Tab_list
+        {
+            
+            width: 100%;
+            box-shadow: #9fa4c9 0px 0px 10px;
+            background-image: linear-gradient( #f6f7fb, #e5e7f2);
+            line-height: 18px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .Tab_list th
+        {
+            border-bottom: 1px solid #d3d5e6;
+            height: 35px;
+            padding-left: 20px;
+            text-align: left;
+            font-weight: normal;
+            font-size: 14px;
+        }
+        .Tab_list td
+        {
+            background: #fff;
+            height: 35px;
+            padding-left: 20px;
+            font-size: 12px;
+            border-bottom: 1px solid #d3d5e6;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .Operation a
+        {
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 14px;
+            color:#a2aecd;
+        }
+        .Operation a:hover 
+        {
+            color:#ff8463;
+        }
+    </style>
+}
+@model Entity.Enterprise
+<div class="TitleDIV">
+    @Html.ActionLink("添加企业信息", "Add", "ActivityInfo", new { HostName = ViewBag.HostName }, null)
+</div>
+<div>
+    <table class="Tab_list" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>
+                企业名称
+            </th>
+            <th>
+                状态
+            </th>
+            <th>
+                创建日期
+            </th>
+            <th>
+                使用截止日期
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        <tr>
+            <td>
+                两点设计两点设计两点设计
+            </td>
+            <td>
+                启用
+            </td>
+            <td>
+                2014-12-12
+            </td>
+            <td>
+                2014-12-12
+            </td>
+            <td>
+                修改 删除
+            </td>
+        </tr>
+        <tr>
+            <td>
+                两点设计
+            </td>
+            <td>
+                启用
+            </td>
+            <td>
+                2014-12-12
+            </td>
+            <td>
+                2014-12-12
+            </td>
+            <td class="Operation">
+                <a href="">修改</a> 删除
+            </td>
+        </tr>
+    </table>
+</div>

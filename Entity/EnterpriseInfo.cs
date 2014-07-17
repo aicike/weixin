@@ -9,11 +9,17 @@ namespace Entity
     public class EnterpriseInfo : BaseEntity
     {
         public int ID { get; set; }
+
+        /// <summary>
+        /// 企业表
+        /// </summary>
+        public int EnterpriseID { get; set; }
+        public virtual Enterprise Enterprise { get; set; }
+
         /// <summary>
         /// 企业简称
         /// </summary>
         [Display(Name = "企业简称")]
-        [Required(ErrorMessage = "企业简称不能为空")]
         [StringLength(10, ErrorMessage = "字数不能大于10")]
         public string SName { get; set; }
 
@@ -21,7 +27,6 @@ namespace Entity
         /// 企业logo
         /// </summary>
         [Display(Name = "企业logo")]
-        [Required(ErrorMessage = "logo不能为空")]
         public string Logo { get; set; }
 
 
@@ -29,7 +34,6 @@ namespace Entity
         /// 分享标题
         /// </summary>
         [Display(Name = "分享标题")]
-        [Required(ErrorMessage = "分享标题不能为空")]
         [StringLength(50, ErrorMessage = "字数不能大于50")]
         public string ShareTitle { get; set; }
 
