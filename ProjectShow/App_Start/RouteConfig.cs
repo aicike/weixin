@@ -16,7 +16,7 @@ namespace ProjectShow
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "ProjectShow", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "default", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

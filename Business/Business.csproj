@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
     <Compile Include="EFModel.cs" />
+    <Compile Include="ProjectModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

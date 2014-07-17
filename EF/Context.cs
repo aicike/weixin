@@ -12,6 +12,9 @@ namespace EF
     public class Context : DbContext
     {
         public DbSet<SystemUser> SystemUser { get; set; }
+        public DbSet<EnterpriseInfo> EnterpriseInfo { get; set; }
+        public DbSet<Project> Project { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

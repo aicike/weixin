@@ -9,9 +9,7 @@ namespace Business
     {
         public IQueryable<T> List()
         {
-
             return base.List<T>().OrderByDescending(a => a.ID);
-
         }
 
         public Result Add(T entity)

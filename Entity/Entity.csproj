@@ -45,6 +45,7 @@
     <Compile Include="Enterprise.cs" />
     <Compile Include="EnterpriseInfo.cs" />
     <Compile Include="EUser.cs" />
+    <Compile Include="ImageInfo.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Session\AcctionSession.cs" />
     <Compile Include="Session\SystemSession.cs" />
