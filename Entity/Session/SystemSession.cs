@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Entity.Session
 {
+    [Serializable]
     public class SystemSession
     {
         /// <summary>

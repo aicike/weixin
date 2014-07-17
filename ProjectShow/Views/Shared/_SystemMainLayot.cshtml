@@ -22,6 +22,7 @@
         {
             margin: 0px;
             color: #6f7b91;
+            font-family:微软雅黑;
         }
         .header
         {
@@ -92,7 +93,65 @@
             background: #f0f4fb;
             margin-bottom:25px;
         }
+        .TitleDIV
+        {
+            height:40px;
+            }
+        .TitleDIV a
+        {
+            height: 40px;
+            background: #4fc2b9;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration:none;
+            padding:5px 10px;
+            cursor:pointer;    
+        }
+        .Tab_list
+        {
+            
+            width: 100%;
+            box-shadow: #9fa4c9 0px 0px 10px;
+            background-image: linear-gradient( #f6f7fb, #e5e7f2);
+            line-height: 18px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .Tab_list th
+        {
+            border-bottom: 1px solid #d3d5e6;
+            height: 35px;
+            padding-left: 20px;
+            text-align: left;
+            font-weight: normal;
+            font-size: 14px;
+        }
+        .Tab_list td
+        {
+            background: #fff;
+            height: 35px;
+            padding-left: 20px;
+            font-size: 12px;
+            border-bottom: 1px solid #d3d5e6;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .Operation a
+        {
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 14px;
+            color:#a2aecd;
+        }
+        .Operation a:hover 
+        {
+            color:#ff8463;
+        }
     </style>
+    @RenderSection("head", required: false)
 </head>
 <body>
      <div id="Main_div" style=" width:100%; overflow:auto">

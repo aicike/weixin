@@ -19,8 +19,8 @@ namespace Entity
         /// <summary>
         /// 姓名
         /// </summary>
-        [Display(Name = "姓名")]
-        [Required(ErrorMessage = "姓名不能为空")]
+        [Display(Name = "账号")]
+        [Required(ErrorMessage = "账号不能为空")]
         [StringLength(20, ErrorMessage = "字数不能大于20")]
         public string Name { get; set; }
 
@@ -35,7 +35,6 @@ namespace Entity
         /// 邮箱(登陆用)
         /// </summary>
         [Display(Name = "邮箱(登陆用)")]
-        [Required(ErrorMessage = "邮箱不能为空")]
         [StringLength(20, ErrorMessage = "字数不能大于20")]
         public string Email { get; set; }
 
@@ -43,7 +42,7 @@ namespace Entity
         /// 密码
         /// </summary>
         [Display(Name = "密码")]
-        [Required(ErrorMessage = "邮箱不能为空")]
+        [Required(ErrorMessage = "密码不能为空")]
         [StringLength(20, ErrorMessage = "字数不能大于20")]
         public string PassWord { get; set; }
     }

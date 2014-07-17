@@ -18,14 +18,12 @@ namespace Entity
         [StringLength(100, ErrorMessage = "字数不能大于100")]
         public string EName { get; set; }
 
-       
-        
 
 
         #region----------------- 子表 --------------------
 
+        public virtual ICollection<EnterpriseInfo> EnterpriseInfo { get; set; }
         public virtual ICollection<Project> Project { get; set; }
-
         public virtual ICollection<EUser> EUser { get; set; }
 
 

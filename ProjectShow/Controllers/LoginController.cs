@@ -43,8 +43,7 @@ namespace ProjectShow.Controllers
                 ss.SUserID = 0;
                 ss.SUserName = "Admin";
                 Session[SystemConst.Session.LoginSystem] = ss;
-                return JavaScript("alert('账号密码错误！')");
-                //Response.Redirect(Url.Action("Index", "S_Default"));
+                return JavaScript("window.location.href='" + Url.Action("Index", "S_Default") + "'");
             }
             else
             {
