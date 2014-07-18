@@ -135,10 +135,10 @@
     <Content Include="Image\item_line.png" />
     <Content Include="Image\logo.png" />
     <Content Include="Image\Logo_144.png" />
-    <Content Include="Image\tr_Bg.png" />
     <Content Include="Scripts\BlockSit\blocksit.js" />
     <Content Include="Scripts\BlockSit\homeStyle.css" />
     <Content Include="Scripts\ClassBtn\style.css" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\EjectOptions\css\css.css" />
     <Content Include="Scripts\EjectOptions\images\bg-2x.png" />
     <Content Include="Scripts\EjectOptions\images\bg-hl-2x.png" />
@@ -148,7 +148,6 @@
     <Content Include="Scripts\EjectOptions\images\moment_icn_info.png" />
     <Content Include="Scripts\EjectOptions\images\moment_icn_pic.png" />
     <Content Include="Scripts\EjectOptions\images\moment_icn_price.png" />
-    <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -168,75 +167,6 @@
     <Content Include="Scripts\EjectOptions\js\jquery.transform.js" />
     <Content Include="Scripts\EjectOptions\js\rotate.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
-    <Content Include="Scripts\JqueryUI\i18n\jquery.ui.datepicker-zh-CN.js" />
-    <Content Include="Scripts\JqueryUI\images\animated-overlay.gif" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_flat_0_000_40x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_flat_100_000_40x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_flat_100_5B1215_40x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_flat_75_aaaaaa_40x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_100_f5f0e5_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_25_cb842e_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_50_EBC87E_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_70_ede4d4_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_highlight-hard_100_EBC87E_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_highlight-soft_60_000_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-bg_inset-soft_100_f4f0ec_1x100.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_222222_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_454545_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_888888_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_c47a23_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_cb672b_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_EBC87E_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_f08000_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_f35f07_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_ff7519_256x240.png" />
-    <Content Include="Scripts\JqueryUI\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Scripts\JqueryUI\jquery-ui-1.10.2.custom.css" />
-    <Content Include="Scripts\JqueryUI\jquery-ui-1.10.2.custom.min.css" />
-    <Content Include="Scripts\JqueryUI\jquery-ui.custom.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.accordion.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.autocomplete.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.button.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.core.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.datepicker.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.dialog.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.draggable.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.droppable.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-blind.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-bounce.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-clip.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-drop.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-explode.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-fade.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-fold.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-highlight.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-pulsate.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-scale.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-shake.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-slide.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect-transfer.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.effect.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.menu.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.mouse.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.position.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.progressbar.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.resizable.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.selectable.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.slider.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.sortable.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.spinner.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.tabs.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.tooltip.min.js" />
-    <Content Include="Scripts\JqueryUI\jquery.ui.widget.min.js" />
     <Content Include="Scripts\Menu\styles.css" />
     <Content Include="Scripts\Swipe\css\swipe.css" />
     <Content Include="Scripts\Swipe\images\1.jpg" />
@@ -245,11 +175,7 @@
     <Content Include="Scripts\Swipe\index.html" />
     <Content Include="Scripts\Swipe\js\swipe.js" />
     <Content Include="Scripts\Swipe\js\swipe.min.js" />
-    <Content Include="Scripts\Timepicker\demos.css" />
-    <Content Include="Scripts\Timepicker\jquery-ui-timepicker-addon.css" />
-    <Content Include="Scripts\Timepicker\jquery-ui-timepicker-addon.js" />
-    <Content Include="Scripts\Timepicker\jquery-ui-timepicker-zh-CN.js" />
-    <Content Include="Scripts\Timepicker\jquery.ui.datepicker-zh-CN.js.js" />
+    <Content Include="Scripts\topbar\juery.topbar.js" />
     <Content Include="Scripts\WeixinShare\ShareAssembly.js" />
     <Content Include="Scripts\wowwindow\css\images\wowwindow-close.gif" />
     <Content Include="Scripts\wowwindow\css\images\wowwindow-controlbar.gif" />
@@ -327,13 +253,7 @@
     <Content Include="Views\Project\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Project\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Project\Add.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\S_Default\Add.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -353,7 +273,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://imtimelyshow.com:8090/</IISUrl>
+          <IISUrl>http://imtimelyshow.com:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
