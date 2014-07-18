@@ -13,7 +13,7 @@ namespace Business
 {
     public class EFModel
     {
-        public DbContext Context = new DbContext("Context");
+        public Context Context= new Context();
 
         public T Get<T>(int id) where T : class,BaseEntity
         {

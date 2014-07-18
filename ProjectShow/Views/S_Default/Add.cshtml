@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_SystemMainLayot.cshtml";
+}
+@section head{
+    <script>
+        $(function () {
+
+            $("#ClosingDate").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+
+            $("#Permanent").change(function () {
+                if ($(this).val() == "True") {
+                    $("#tr_closingDate").hide();
+                }
+                else {
+                    $("#tr_closingDate").show();
+                }
+            });
+
+            $("#sub_button").click(function () {
+                if ($("#Permanent").val() == "False") {
+                    if ($("#ClosingDate").val().length <= 0) {
+                        alert("请输入使用截止日期！");
+                        return false;
+                    }
+                }
+
+            });
+
+
+        });
+    </script>
+
+}
+@model Entity.Enterprise
+<div class="Div_Title">
+    企业管理 -> 添加企业信息
+</div>
+<fieldset style="font-size: 14px">
+    <legend>添加企业信息</legend>
+    @using (Ajax.BeginForm("Add", "S_Default", null, new AjaxOptions() { UpdateTargetId = "alert" }))
+    {
+        <table class="Tab_info" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="width: 120px">
+                    企业名称：
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.EName)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.EName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    状态：
+                </td>
+                <td>
+                    <select id="Status" name="Status">
+                        <option value="True">启用</option>
+                        <option value="False">禁用</option>
+                    </select>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    是否永久使用：
+                </td>
+                <td>
+                    <select id="Permanent" name="Permanent">
+                        <option value="False">否</option>
+                        <option value="True">是</option>
+                    </select>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr id="tr_closingDate" >
+                <td>
+                    使用截止日期：
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.ClosingDate)
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        
+        <div>
+            <input type="submit" id="sub_button" class="input_btuuon" value="保存" />
+            <input type="button" value="返回" onclick="window.location.href='@Url.Action("Index", "S_Default")'" class="input_btuuon" />
+        </div>
+    }
+</fieldset>
