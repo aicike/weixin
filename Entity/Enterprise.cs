@@ -40,7 +40,7 @@ namespace Entity
         /// 使用截止日期
         /// </summary>
         [Display(Name = "使用截止日期")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
         #region----------------- 子表 --------------------
 

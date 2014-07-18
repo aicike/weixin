@@ -1,9 +1,17 @@
 ﻿@{
     Layout = "~/Views/Shared/_SystemMainLayot.cshtml";
 }
+
+
 @section head{
     <script>
         $(function () {
+
+            var stauts = "@Model.Status";
+            var Permanent = "@Model.Permanent";
+            $("#Status").val(stauts)
+            $("#Permanent").val(Permanent)
+
             $("#ClosingDate").datepicker({
                 changeMonth: true,
                 changeYear: true
@@ -17,6 +25,7 @@
                     $("#tr_closingDate").show();
                 }
             });
+            $("#Permanent").change();
 
             $("#sub_button").click(function () {
                 if ($("#Permanent").val() == "False") {
@@ -35,11 +44,11 @@
 }
 @model Entity.Enterprise
 <div class="Div_Title">
-    企业管理 -> 添加企业信息
+    企业管理 -> 修改企业信息
 </div>
 <fieldset style="font-size: 14px">
-    <legend>添加企业信息</legend>
-    @using (Ajax.BeginForm("Add", "S_Default", null, new AjaxOptions() { UpdateTargetId = "alert" }))
+    <legend>修改企业信息</legend>
+    @using (Ajax.BeginForm("Edit", "S_Default", null, new AjaxOptions() { UpdateTargetId = "alert" }))
     {
         <table class="Tab_info" cellpadding="0" cellspacing="0">
             <tr>
@@ -97,3 +106,4 @@
         </div>
     }
 </fieldset>
+

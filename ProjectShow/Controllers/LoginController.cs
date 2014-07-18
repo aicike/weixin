@@ -50,7 +50,6 @@ namespace ProjectShow.Controllers
                  
                 return JavaScript("alert('账号密码错误！')");
             }
-            return View();
         }
 
     }
