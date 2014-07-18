@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@model Entity.Project
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=K57DtY3SfG18CP6N7RxCkyRv"></script>
+<script>
+    $(function () {
+        JMessage("123");
+        $(".radio").change(function () {
+            if ($(".raion:checked").val() == 1) {
+                $("#IsEnabled").val("true");
+            } else {
+                $("#IsEnabled").val("false");
+            }
+        });
+
+
+        try {
+
+            //纬度
+            var TLng = $("#Lng").val();
+            //经度
+            var TLat = $("#Lat").val();
+
+
+            //百度地图
+            var map = new BMap.Map("allmap");
+
+            //允许缩放
+            map.enableScrollWheelZoom(true);
+            map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+            //            map.addControl(new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL }));  //右上角，仅包含平移和缩放按钮
+            //            map.addControl(new BMap.NavigationControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT, type: BMAP_NAVIGATION_CONTROL_PAN }));  //左下角，仅包含平移按钮
+            map.addControl(new BMap.NavigationControl({ anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM }));  //右下角，仅包含缩放按钮
+
+            //反编译地址
+            var gc = new BMap.Geocoder();
+
+            //定位当前城市
+            if (TLng != "" && TLng != undefined) {
+
+
+                //显示地图
+                var point = new BMap.Point(TLng, TLat);
+                map.centerAndZoom(point, 12);
+
+
+                //创建坐标 lng：纬度 lat：经度
+                //                var Tpoint = new BMap.Point(result.center.lng, result.center.lat);
+                var marker = new BMap.Marker(point);  // 创建标注
+                map.addOverlay(marker);              // 将标注添加到地图中
+                marker.enableDragging();    //可拖拽
+                //添加坐标备注
+                var label = new BMap.Label("移动我来定位", { offset: new BMap.Size(20, -10) });
+                marker.setLabel(label);
+
+                //移动标注事件
+                marker.addEventListener("onmouseup", function (e) {
+                    $("#Lng").val(e.point.lng);
+                    $("#Lat").val(e.point.lat);
+                    //反编译地址
+                    var pt = e.point;
+                    gc.getLocation(pt, function (rs) {
+                        var addComp = rs.addressComponents;
+                        $("#MapAddress").val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                    });
+
+                });
+
+            }
+            else {
+                function myFun(result) {
+                    var cityName = result.name;
+                    map.setCenter(cityName);
+
+                    //显示地图
+                    map.centerAndZoom(result.center, 12);
+
+                    //创建坐标 lng：纬度 lat：经度
+                    var Tpoint = new BMap.Point(result.center.lng, result.center.lat);
+                    var marker = new BMap.Marker(Tpoint);  // 创建标注
+                    map.addOverlay(marker);              // 将标注添加到地图中
+                    marker.enableDragging();    //可拖拽
+                    //添加坐标备注
+                    var label = new BMap.Label("移动我来定位", { offset: new BMap.Size(20, -10) });
+                    marker.setLabel(label);
+
+                    //移动标注事件
+                    marker.addEventListener("onmouseup", function (e) {
+                        $("#Lng").val(e.point.lng);
+                        $("#Lat").val(e.point.lat);
+                        //反编译地址
+                        var pt = e.point;
+                        gc.getLocation(pt, function (rs) {
+                            var addComp = rs.addressComponents;
+                            $("#MapAddress").val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                        });
+
+                    });
+
+                }
+                var myCity = new BMap.LocalCity();
+                myCity.get(myFun);
+            }
+        } catch (e) {
+
+        }
+
+    });
+</script>
+@using (Ajax.BeginForm("Add", "Project", null, new AjaxOptions() { UpdateTargetId = "alert" }))
+{
+    <table>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 项目名称
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.PName)
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.PName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 项目电话
+            </td>
+            <td class="tdField">@Html.TextBoxFor(a => a.Phone)
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.Phone)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 状态
+            </td>
+            <td>@Html.HiddenFor(a => a.IsEnabled)
+                <input type="radio" id="radio1" class="radio" checked="checked" value="1" name="radio" /><label
+                    for="radio1">启用</label><input type="radio" id="radio2" class="radio" value="2" name="radio" /><label
+                        for="radio2">禁用</label>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 地理位置
+            </td>
+            <td colspan="2">
+                <div id="allmap" style="width: 555px; height: 290px; border: 1px solid #000">
+                </div>
+                @Html.HiddenFor(a => a.Lng)
+                @Html.HiddenFor(a => a.Lat)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 坐标地址
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.MapAddress)
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.MapAddress)
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" id="btnSubmit" value="保存" class="input_button" style="margin-right: 20px" /><input type="button" value="返回" class="input_button" onclick="location.href='@ViewBag.RawUrl'" />
+    </div>
+}

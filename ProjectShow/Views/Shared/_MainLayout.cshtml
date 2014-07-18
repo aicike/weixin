@@ -2,7 +2,9 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <script src="@Url.Content("/Scripts/jquery-1.8.3.min.js")"  type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery-1.8.3.min.js")"  type="text/javascript"></script>   
+    <script src="@Url.Content("/Scripts/topbar/juery.topbar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/common.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.validate-vsdoc.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -98,12 +100,12 @@
             width: 100%;
             min-height: 680px;
             background: #f0f4fb;
-            margin-bottom:25px;
+            margin-bottom: 25px;
         }
         .TitleDIV
         {
-            height:40px;
-            }
+            height: 40px;
+        }
         .TitleDIV a
         {
             height: 40px;
@@ -113,13 +115,12 @@
             color: #fff;
             font-weight: bold;
             font-size: 16px;
-            text-decoration:none;
-            padding:5px 10px;
-            cursor:pointer;    
+            text-decoration: none;
+            padding: 5px 10px;
+            cursor: pointer;
         }
         .Tab_list
         {
-            
             width: 100%;
             box-shadow: #9fa4c9 0px 0px 10px;
             background-image: linear-gradient( #f6f7fb, #e5e7f2);
@@ -231,10 +232,10 @@
                             margin-right: 10px;" />
                     </div>
                     <div style="float: left">
-                        <a class="MeunA_Sel" href="">首页 </a>
+                        <a class="MeunA_Sel" href="@Url.Action("Index", "Default")">首页 </a>
                     </div>
                     <div style="float: left">
-                        <a class="MeunA" href="">项目/产品 </a>
+                        <a class="MeunA" href="@Url.Action("Index", "Project")">项目/产品 </a>
                     </div>
                     <div style="float: left">
                         <a class="MeunA" href="">账号设置 </a>
