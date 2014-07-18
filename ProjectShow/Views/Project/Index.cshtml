@@ -3,20 +3,19 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 @model PagedList<Entity.Project>
-
-<div class="option">@Html.ActionLink("添加", "Add", "Project")</div>
-<table cellpadding="0" cellspacing="0">
+<div class="TitleDIV">@Html.ActionLink("添加", "Add", "Project")</div>
+<table class="Tab_list" cellpadding="0" cellspacing="0">
     <tr>
-        <th>
+        <th style="width: 200px">
             项目名称
         </th>
-        <th>
+        <th style="width: 200px">
             项目电话
         </th>
         <th>
             状态
         </th>
-        <th style="width: 200px;">
+        <th style="width: 100px;">
             操作
         </th>
     </tr>
@@ -32,14 +31,14 @@
             <td>
                 @(item.IsEnabled == true ? "启用" : "禁用")
             </td>
-            <td class="operation">
+            <td class="Operation">
                 @Html.ActionLink("修改", "Edit", "Project", new { id = item.ID })
                 @Ajax.ActionLink("删除", "Delete", "Project", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "Project", new { id = item.ID }) + "',null)" })
             </td>
         </tr>
     }
 </table>
-<div class="pages">
+<div style="margin-top: 20px;">
     @Html.Pager(Model, new PagerOptions
    {
        PageIndexParameterName = "ID",

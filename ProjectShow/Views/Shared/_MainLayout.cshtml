@@ -3,6 +3,8 @@
 <head>
     <title>@ViewBag.Title</title>
     <script src="@Url.Content("/Scripts/EjectOptions/js/jquery-1.7.2.min.js")"  type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/topbar/juery.topbar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/common.js")" type="text/javascript"></script>
     <script>
         $(function () {
             SetMainHeight()
@@ -12,7 +14,7 @@
         }
 
         function SetMainHeight() {
-            $("#Main_div").css("height", $(window).height()+"px");
+            $("#Main_div").css("height", $(window).height() + "px");
         }
     </script>
     <style>
@@ -88,12 +90,12 @@
             width: 100%;
             min-height: 680px;
             background: #f0f4fb;
-            margin-bottom:25px;
+            margin-bottom: 25px;
         }
         .TitleDIV
         {
-            height:40px;
-            }
+            height: 40px;
+        }
         .TitleDIV a
         {
             height: 40px;
@@ -103,13 +105,12 @@
             color: #fff;
             font-weight: bold;
             font-size: 16px;
-            text-decoration:none;
-            padding:5px 10px;
-            cursor:pointer;    
+            text-decoration: none;
+            padding: 5px 10px;
+            cursor: pointer;
         }
         .Tab_list
         {
-            
             width: 100%;
             box-shadow: #9fa4c9 0px 0px 10px;
             background-image: linear-gradient( #f6f7fb, #e5e7f2);
@@ -141,17 +142,17 @@
             font-weight: bold;
             text-decoration: none;
             font-size: 14px;
-            color:#a2aecd;
+            color: #a2aecd;
         }
-        .Operation a:hover 
+        .Operation a:hover
         {
-            color:#ff8463;
+            color: #ff8463;
         }
     </style>
     @RenderSection("head", required: false)
 </head>
 <body>
-    <div id="Main_div" style=" width:100%; overflow:auto">
+    <div id="Main_div" style="width: 100%; overflow: auto">
         <div style="box-shadow: #9fa4c9 0px 0px 10px; width: 960px; margin: auto auto;">
             <div class="header">
                 <div class="topHead_left">
@@ -160,10 +161,10 @@
                             margin-right: 10px;" />
                     </div>
                     <div style="float: left">
-                        <a class="MeunA_Sel" href="@Url.Action("Index","Default")">首页 </a>
+                        <a class="MeunA_Sel" href="@Url.Action("Index", "Default")">首页 </a>
                     </div>
                     <div style="float: left">
-                        <a class="MeunA" href="@Url.Action("Index","Project")">项目/产品 </a>
+                        <a class="MeunA" href="@Url.Action("Index", "Project")">项目/产品 </a>
                     </div>
                     <div style="float: left">
                         <a class="MeunA" href="">账号设置 </a>
@@ -189,6 +190,12 @@
                 </tr>
             </table>
         </div>
+    </div>
+    <div id="dialog">
+    </div>
+    <div id="alert">
+    </div>
+    <div id="jmessage" style="display: none;">
     </div>
 </body>
 </html>
