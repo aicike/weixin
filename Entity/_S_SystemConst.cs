@@ -18,5 +18,13 @@ namespace Entity
 
             public const string LoginAccount = "LoginAccount";
         }
+
+        public class Business
+        {
+            private Business() { }
+            public const string key = "abcdefgh";
+            public const string iv = "12345678";
+
+        }
     }
 }

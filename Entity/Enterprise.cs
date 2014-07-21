@@ -33,14 +33,14 @@ namespace Entity
         /// <summary>
         /// 永久使用
         /// </summary>
-        [Display(Name = "创建日期")]
+        [Display(Name = "永久使用")]
         public bool Permanent { get; set; }
 
         /// <summary>
         /// 使用截止日期
         /// </summary>
         [Display(Name = "使用截止日期")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
         #region----------------- 子表 --------------------
 

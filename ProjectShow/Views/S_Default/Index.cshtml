@@ -3,11 +3,13 @@
     Layout = "~/Views/Shared/_SystemMainLayot.cshtml";
 }
 @section head{
+    <script>
+    </script>
     <style>
         
     </style>
 }
-@model Entity.Enterprise
+@model List<Entity.Enterprise>
 <div class="TitleDIV">
     @Html.ActionLink("添加企业信息", "Add", "S_Default", null, null)
 </div>
@@ -30,39 +32,37 @@
                 操作
             </th>
         </tr>
+        @foreach (var item in Model)
+        {
+            
         <tr>
             <td>
-                两点设计两点设计两点设计
+                @item.EName
             </td>
             <td>
-                启用
+                @(item.Status?"启用":"禁用")
             </td>
             <td>
-                2014-12-12
+                @item.CreteDate
             </td>
             <td>
-                2014-12-12
-            </td>
-            <td>
-                修改 删除
-            </td>
-        </tr>
-        <tr>
-            <td>
-                两点设计
-            </td>
-            <td>
-                启用
-            </td>
-            <td>
-                2014-12-12
-            </td>
-            <td>
-                2014-12-12
+                @if (item.Permanent)
+                { 
+                    @:永久使用    
+                }
+                else
+                { 
+                    @item.ClosingDate.Value.ToString("yyyy-MM-dd")
+                }
             </td>
             <td class="Operation">
-                <a href="">修改</a> 删除
+                @Html.ActionLink("修改", "Edit", new { ID = item.ID })
+                
+                @Ajax.ActionLink("删除", "Delete", new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "if (confirm('你确定要删除吗')) { window.location.href='" + Url.Action("Delete", "S_Default", new { ID = item.ID }) + "'; }" })
+
             </td>
         </tr>
+        }
+  
     </table>
 </div>

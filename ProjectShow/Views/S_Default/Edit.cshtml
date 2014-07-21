@@ -4,6 +4,22 @@
 @section head{
     <script>
         $(function () {
+
+            var stauts = "@Model.Status";
+            var Permanent = "@Model.Permanent";
+            $("#Status").val(stauts)
+            $("#Permanent").val(Permanent)
+
+
+            var EUserName = "@ViewBag.EUserName";
+            var EUserPwd = "@ViewBag.EUserPwd";
+            var UserID = "@ViewBag.UserID";
+            $("#EUserName").val(EUserName)
+            $("#EUserPwd").val(EUserPwd)
+            $("#UserID").val(UserID)
+
+           
+
             $("#ClosingDate").datepicker({
                 changeMonth: true,
                 changeYear: true
@@ -17,6 +33,7 @@
                     $("#tr_closingDate").show();
                 }
             });
+            $("#Permanent").change();
 
             $("#sub_button").click(function () {
                 if ($("#Permanent").val() == "False") {
@@ -24,22 +41,6 @@
                         alert("请输入使用截止日期！");
                         return false;
                     }
-                }
-                if ($("#EUserName").val().length <= 0) {
-                    alert("请输入登陆账号！");
-                    return false;
-                }
-                else if ($("#EUserName").val().length < 6 || $("#EUserName").val().length >= 20) {
-                    alert("登陆账号长度在6-20之间");
-                    return false;
-                }
-                if ($("#EUserPwd").val().length <= 0) {
-                    alert("请输入登陆密码！");
-                    return false;
-                }
-                else if ($("#EUserName").val().length < 6 || $("#EUserName").val().length >= 20) {
-                    alert("登陆密码长度在6-20之间");
-                    return false;
                 }
 
             });
@@ -50,11 +51,11 @@
 }
 @model Entity.Enterprise
 <div class="Div_Title">
-    企业管理 -> 添加企业信息
+    企业管理 -> 修改企业信息
 </div>
 <fieldset style="font-size: 14px">
-    <legend>添加企业信息</legend>
-    @using (Ajax.BeginForm("Add", "S_Default", null, new AjaxOptions() { UpdateTargetId = "alert" }))
+    <legend>修改企业信息</legend>
+    @using (Ajax.BeginForm("Edit", "S_Default", null, new AjaxOptions() { UpdateTargetId = "alert" }))
     {
         <table class="Tab_info" cellpadding="0" cellspacing="0">
             <tr>
@@ -63,6 +64,8 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(a => a.EName)
+                    @Html.HiddenFor(a => a.ID);
+                    @Html.HiddenFor(a => a.CreteDate);
                 </td>
                 <td>
                     @Html.ValidationMessageFor(a => a.EName)
@@ -111,6 +114,7 @@
                 <td>
                     <input type="text" id="EUserName" name="EUserName" />
                     （长度 6-20）
+                    <input type="hidden" id="UserID" name="UserID" />
                 </td>
                 <td>
                 </td>
@@ -120,7 +124,8 @@
                     登陆密码：
                 </td>
                 <td>
-                    <input type="text" id="EUserPwd" name="EUserPwd" /> （长度 6-20）
+                    <input type="text" id="EUserPwd" name="EUserPwd" />
+                    （长度 6-20）
                 </td>
                 <td>
                 </td>

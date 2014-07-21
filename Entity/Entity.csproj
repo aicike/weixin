@@ -47,7 +47,7 @@
     <Compile Include="EUser.cs" />
     <Compile Include="ImageInfo.cs" />
     <Compile Include="Project.cs" />
-    <Compile Include="Session\AcctionSession.cs" />
+    <Compile Include="Session\AccountSession.cs" />
     <Compile Include="Session\SystemSession.cs" />
     <Compile Include="_S_Dialog.cs" />
     <Compile Include="_S_SystemConst.cs" />

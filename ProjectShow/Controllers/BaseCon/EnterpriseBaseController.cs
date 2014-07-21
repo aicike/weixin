@@ -4,40 +4,36 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Entity;
+using Entity.Session;
 using System.Web.Routing;
 
 namespace ProjectShow.Controllers.BaseCon
 {
     public class EnterpriseBaseController : BaseController
     {
-        protected EUser LoginAccount
+        //Session
+        protected AccountSession LoginAccount
         {
             get
             {
-                var account = Session[SystemConst.Session.LoginAccount] as EUser;
-                return account;
+                var acctionsession = Session[SystemConst.Session.LoginAccount] as AccountSession;
+                return acctionsession;
             }
             set { Session[SystemConst.Session.LoginAccount] = value; }
         }
 
 
-        public ActionResult Index()
-        {
-            return View();
-        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            LoginAccount = new EUser() { EnterpriseID = 1 };
-
-            //if (LoginAccount == null)
-            //{
-            //    filterContext.Result = new RedirectToRouteResult("Default",
-            //        new RouteValueDictionary{
-            //            { "controller", "Login" },
-            //            { "action", "SystemLogin" }
-            //    });
-            //    return;
-            //}
+            if (LoginAccount == null)
+            {
+                filterContext.Result = new RedirectToRouteResult("Default",
+                    new RouteValueDictionary{
+                        { "controller", "Login" },
+                        { "action", "SystemLogin" }
+                });
+                return;
+            }
 
             //上一次请求信息
             var request = filterContext.RequestContext.HttpContext.Request;
@@ -46,5 +42,6 @@ namespace ProjectShow.Controllers.BaseCon
                 ViewBag.RawUrl = filterContext.RequestContext.HttpContext.Request.UrlReferrer.AbsoluteUri;
             }
         }
+
     }
 }

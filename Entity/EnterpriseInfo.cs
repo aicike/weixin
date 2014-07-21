@@ -56,5 +56,11 @@ namespace Entity
         [Display(Name = "按钮名称")]
         [StringLength(8, ErrorMessage = "字数不能大于8")]
         public string ButtonName { get; set; }
+
+        /// <summary>
+        /// 预览次数
+        /// </summary>
+        [Display(Name = "预览次数")]
+        public int PreviewCnt { get; set; }
     }
 }

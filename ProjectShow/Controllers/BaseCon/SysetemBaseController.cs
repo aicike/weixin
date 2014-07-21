@@ -26,7 +26,7 @@ namespace ProjectShow.Controllers.BaseCon
         {
             if (LoginSystem == null)
             {
-                Response.Redirect("http://" + SystemConst.WebUrl);
+                Response.Redirect("http://" + SystemConst.WebUrl+"/login/systemLogin");
             }
             base.OnActionExecuting(filterContext);
         }
