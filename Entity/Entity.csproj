@@ -49,6 +49,7 @@
     <Compile Include="Project.cs" />
     <Compile Include="Session\AcctionSession.cs" />
     <Compile Include="Session\SystemSession.cs" />
+    <Compile Include="_S_Dialog.cs" />
     <Compile Include="_S_SystemConst.cs" />
     <Compile Include="_S_BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

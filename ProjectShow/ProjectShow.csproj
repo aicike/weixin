@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BaseCon\BaseController.cs" />
     <Compile Include="Controllers\BaseCon\EnterpriseBaseController.cs" />
     <Compile Include="Controllers\BaseCon\SysetemBaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
