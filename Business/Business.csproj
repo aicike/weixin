@@ -51,11 +51,14 @@
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
     <Compile Include="Common\DESEncrypt.cs" />
+    <Compile Include="Common\ExpandMethod.cs" />
     <Compile Include="Common\QrCodes.cs" />
+    <Compile Include="Common\ToolImage.cs" />
     <Compile Include="EFModel.cs" />
     <Compile Include="EnterpriseInfoModel.cs" />
     <Compile Include="EnterpriseModel.cs" />
     <Compile Include="EUserModel.cs" />
+    <Compile Include="ImageInfoModel.cs" />
     <Compile Include="ProjectModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

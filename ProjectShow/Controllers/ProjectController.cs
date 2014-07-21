@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Business;
 using Entity;
 using ProjectShow.Controllers.BaseCon;
+using Business.Common;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Drawing;
 
 namespace ProjectShow.Controllers
 {
@@ -61,6 +65,33 @@ namespace ProjectShow.Controllers
                 return Alert(result);
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "Project") + "'");
+        }
+
+        [HttpPost]
+        public JsonResult UpImg()
+        {
+            var files = Request.Files;
+            if (Request.Files.Count > 0)
+            {
+                string savePath = null;
+                var f = Request.Files[0];
+                bool isOk= ToolImage.SuperGetPicThumbnail(f,out savePath, 70, 800, 0, SmoothingMode.HighQuality, CompositingQuality.HighQuality, InterpolationMode.High);
+                if (isOk)
+                {
+                    return Json(new { jsonrpc = "2.0", result = savePath });
+
+                    //return "({'jsonrpc' : '2.0', 'result' : " + savePath + ", 'id' : 'id'})";
+                }
+                else {
+                    //return "({'jsonrpc' : '2.0', 'error' : {'code': 103, 'message': '文件上传失败。'}, 'id' : 'id'})";
+                    return Json(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
+                }
+            }
+            else
+            {
+                return Json(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
+            }
+            return null;
         }
     }
 }
