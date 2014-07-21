@@ -18,7 +18,8 @@ namespace Entity
         [StringLength(100, ErrorMessage = "字数不能大于100")]
         public string PName { get; set; }
 
-        [Display(Name = "售楼地图定位地址")]
+        [Display(Name = "地图定位地址")]
+        [Required(ErrorMessage = "坐标地址不能为空")]
         public string MapAddress { get; set; }
 
         /// <summary>

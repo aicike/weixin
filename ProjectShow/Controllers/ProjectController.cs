@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using Business;
 using Entity;
+using ProjectShow.Controllers.BaseCon;
 
 namespace ProjectShow.Controllers
 {
     /// <summary>
     /// 项目管理页面
     /// </summary>
-    public class ProjectController : Controller
+    public class ProjectController : EnterpriseBaseController
     {
         public ActionResult Index(int? id)
         {
@@ -30,12 +31,13 @@ namespace ProjectShow.Controllers
         public ActionResult Add(Project project)
         {
             ProjectModel pmodel = new ProjectModel();
-            
-            //var result = CardModel.Add(cardinfo);
-            //if (result.HasError)
-            //{
-            //    return JavaScript(AlertJS_NoTag(new Dialog(result.Error)));
-            //}
+
+            project.EnterpriseID = LoginAccount.EnterpriseID;
+            var result = pmodel.Add(project);
+            if (result.HasError)
+            {
+                return JavaScript(AlertJS_NoTag(new Dialog(result.Error)));
+            }
             return JavaScript("window.location.href='" + Url.Action("Index", "Project") + "'");
         }
     }
