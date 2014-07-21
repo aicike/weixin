@@ -32,7 +32,7 @@
                 @(item.IsEnabled == true ? "启用" : "禁用")
             </td>
             <td class="Operation">
-                @Html.ActionLink("修改", "Edit", "Project", new { id = item.ID })
+                @Html.ActionLink("修改", "Edit", "Project", new { id = item.ID }, null)
                 @Ajax.ActionLink("删除", "Delete", "Project", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "Project", new { id = item.ID }) + "',null)" })
             </td>
         </tr>
