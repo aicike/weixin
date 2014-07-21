@@ -2,14 +2,13 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <script src="@Url.Content("/Scripts/jquery-1.8.3.min.js")"  type="text/javascript"></script>   
+    <script src="@Url.Content("/Scripts/jquery-1.8.3.min.js")"  type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/topbar/juery.topbar.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/common.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.validate-vsdoc.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
     <script src="@Url.Content("~/Scripts/jquery-ui-1.10.3.custom.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/JqueryUI/jquery.ui.core.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/JqueryUI/jquery.ui.widget.min.js")" type="text/javascript"></script>
@@ -18,7 +17,15 @@
     <script>
         $(function () {
             SetMainHeight()
+
+            $("#outs").click(function () {
+                if (confirm("你确定要退出吗？")) {
+                    window.location.href= "@Url.Action("Outs","Default")";
+                }
+
+            });
         });
+        
         window.onresize = function () {
             SetMainHeight()
         }
@@ -62,6 +69,13 @@
             overflow: hidden;
             text-align: center;
             font-size: 14px;
+        }
+        .topHead_right a
+        {
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
         }
         
         .MeunA
@@ -121,9 +135,9 @@
         }
         .Tab_list
         {
+            background:#fff;
             width: 100%;
             box-shadow: #9fa4c9 0px 0px 10px;
-            background-image: linear-gradient( #f6f7fb, #e5e7f2);
             line-height: 18px;
             word-break: break-all;
             word-wrap: break-word;
@@ -131,13 +145,23 @@
         .Tab_list th
         {
             border-bottom: 1px solid #d3d5e6;
+             background-image: linear-gradient( #f6f7fb, #e5e7f2);
             height: 35px;
             padding-left: 20px;
             text-align: left;
             font-weight: normal;
             font-size: 14px;
         }
-         .Tab_list tr:hover
+        .Tab_list td
+        {
+            height: 35px;
+            padding-left: 20px;
+            font-size: 12px;
+            border-bottom: 1px solid #d3d5e6;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .Tab_list tr:hover
         {
             background-color: #f6f7fb ;
            
@@ -146,16 +170,6 @@
         {
              background-image: url(@Url.Content("/Image/tr_Bg.png"));
             background-repeat:repeat-y; 
-        }
-        .Tab_list td
-        {
-            background: #fff;
-            height: 35px;
-            padding-left: 20px;
-            font-size: 12px;
-            border-bottom: 1px solid #d3d5e6;
-            padding-top: 10px;
-            padding-bottom: 10px;
         }
         .Operation a
         {
@@ -198,6 +212,7 @@
         {
             text-align: right;
             padding-right: 5px;
+            font-weight: bold;
         }
         .Tab_info td
         {
@@ -221,6 +236,10 @@
         }
     </style>
     @RenderSection("head", required: false)
+    @{
+        var Account = Session[Entity.SystemConst.Session.LoginAccount] as Entity.Session.AcctionSession;
+       
+    }
 </head>
 <body>
     <div id="Main_div" style="width: 100%; overflow: auto">
@@ -232,19 +251,40 @@
                             margin-right: 10px;" />
                     </div>
                     <div style="float: left">
-                        <a class="MeunA_Sel" href="@Url.Action("Index", "Default")">首页 </a>
+                        @if (ViewBag.Menu == 1)
+                        {
+                            <a class="MeunA_Sel" href="@Url.Action("Index", "Default")">首页 </a>
+                        }
+                        else
+                        {
+                            <a class="MeunA" href="@Url.Action("Index", "Default")">首页 </a>
+                        }
                     </div>
                     <div style="float: left">
-                        <a class="MeunA" href="@Url.Action("Index", "Project")">项目/产品 </a>
+                        @if (ViewBag.Menu == 2)
+                        {
+                            <a class="MeunA_Sel" href="@Url.Action("Index", "Project")">项目/产品 </a>
+                        }
+                        else
+                        {
+                            <a class="MeunA" href="@Url.Action("Index", "Project")">项目/产品 </a>
+                        }
                     </div>
                     <div style="float: left">
-                        <a class="MeunA" href="">账号设置 </a>
+                        @if (ViewBag.Menu == 3)
+                        {
+                            <a class="MeunA_Sel" href="">账号设置 </a>
+                        }
+                        else
+                        {
+                            <a class="MeunA" href="">账号设置 </a>
+                        }
                     </div>
                     <div style="clear: both">
                     </div>
                 </div>
                 <div class="topHead_right">
-                    您好 xxx 退出
+                    您好 @Account.UserName  <a id="outs"  >退出</a>
                 </div>
                 <div style="clear: both">
                 </div>
@@ -255,14 +295,22 @@
                         @RenderBody()
                     </td>
                     <td style="width: 190px; background: #fff; padding: 25px 10px; font-size: 14px; line-height: 20px">
-                        项目启用日期：14-02-22<br />
-                        项目截止日期：15-02-22
+                        项目启用日期：@Account.EnterpriseCreateDate.ToString("yyyy-MM-dd")<br />
+                        项目截止日期：
+                        @if (Account.Permanent)
+                        {
+                            @:永久使用
+                        }
+                        else
+                        {
+                            @Account.ClosingDate.Value.ToString("yyyy-MM-dd")
+                        }
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-     <div id="dialog">
+    <div id="dialog">
     </div>
     <div id="alert">
     </div>

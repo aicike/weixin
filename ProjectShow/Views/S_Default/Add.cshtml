@@ -25,13 +25,28 @@
                         return false;
                     }
                 }
+                if ($("#EUserName").val().length <= 0) {
+                    alert("请输入登陆账号！");
+                    return false;
+                }
+                else if ($("#EUserName").val().length < 6 || $("#EUserName").val().length >= 20) {
+                    alert("登陆账号长度在6-20之间");
+                    return false;
+                }
+                if ($("#EUserPwd").val().length <= 0) {
+                    alert("请输入登陆密码！");
+                    return false;
+                }
+                else if ($("#EUserName").val().length < 6 || $("#EUserName").val().length >= 20) {
+                    alert("登陆密码长度在6-20之间");
+                    return false;
+                }
 
             });
 
 
         });
     </script>
-
 }
 @model Entity.Enterprise
 <div class="Div_Title">
@@ -79,12 +94,33 @@
                 <td>
                 </td>
             </tr>
-            <tr id="tr_closingDate" >
+            <tr id="tr_closingDate">
                 <td>
                     使用截止日期：
                 </td>
                 <td>
                     @Html.TextBoxFor(a => a.ClosingDate)
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    登陆账号：
+                </td>
+                <td>
+                    <input type="text" id="EUserName" name="EUserName" />
+                    （长度 6-20）
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    登陆密码：
+                </td>
+                <td>
+                    <input type="text" id="EUserPwd" name="EUserPwd" /> （长度 6-20）
                 </td>
                 <td>
                 </td>

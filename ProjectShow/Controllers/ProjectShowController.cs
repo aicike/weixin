@@ -15,7 +15,7 @@ namespace ProjectShow.Controllers
         /// 首页
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int EID)
         {
             //var s = Newtonsoft.Json.JsonConvert.SerializeObject("a");
             //Newtonsoft.Json.JsonConvert.DeserializeObject(s);

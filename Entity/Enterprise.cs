@@ -33,7 +33,7 @@ namespace Entity
         /// <summary>
         /// 永久使用
         /// </summary>
-        [Display(Name = "创建日期")]
+        [Display(Name = "永久使用")]
         public bool Permanent { get; set; }
 
         /// <summary>

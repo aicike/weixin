@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Menu = 1;
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 @section head{
@@ -10,6 +10,11 @@
         $(function () {
             $('.popups a').wowwindow({
                 draggable: true
+            });
+            //二维码
+            $('a[rel=qrcode]').wowwindow({
+                draggable: true,
+                width: 425
             });
         });
         function divZZC_over(div) {
@@ -57,9 +62,12 @@
             margin-left: 8px;
             width: 210px;
             height: 105px;
+            line-height: 105px;
+            overflow: hidden;
             background: #f47564;
             color: #fff;
             float: left;
+            cursor: pointer;
         }
         .Share
         {
@@ -106,7 +114,7 @@
         .tab_fx
         {
             width: 100%;
-            line-height:18px;
+            line-height: 18px;
         }
         .tab_fx td
         {
@@ -115,27 +123,35 @@
         }
     </style>
 }
+@model Entity.EnterpriseInfo
 <div class="Div_Title">
     首页
 </div>
 <div style="width: 100%; margin-bottom: 25px;">
     <div class="div_tj">
         <div class="div_tj_top">
-            1234</div>
+            @Model.PreviewCnt.ToString("n")</div>
         <div class="div_tj_bottom">
             首页预览次数</div>
     </div>
     <div class="div_tjz">
         <div class="div_tj_top">
-            212343234</div>
+            @ViewBag.Count</div>
         <div class="div_tj_bottom">
             总预览次数</div>
     </div>
-    <div class="div_ewm">
-        <div class="div_tj_top">
-            二维码</div>
-        <div class="div_tj_bottom">
-            分享地址</div>
+    <div class="popups">
+        <a href="#example4" rel="qrcode">
+            <div class="div_ewm">
+                <div style="float: left; margin-top: 17px; margin-left: 10px; width: 70px; height: 70px;
+                    background: #fff">
+                    <img src="@Url.Action("GetQrCode", "Default")" style=" width:70px" />
+                </div>
+                <div style="float: right; font-size: 14px; margin-right: 10px">
+                    点击查看分享地址
+                </div>
+            </div>
+        </a>
     </div>
     <div style="clear: both">
     </div>
@@ -152,15 +168,22 @@
             <table cellpadding="0" cellspacing="0" class="tab_fx">
                 <tr>
                     <td align="center" colspan="2">
-                        <img src="../../Image/logo.png" style="max-width: 75%; max-height: 70px" />
+                        @if (string.IsNullOrEmpty(Model.Logo))
+                        {
+                            <img src="@Url.Content("/Image/logo.png")" style="max-width: 75%; max-height: 70px" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content(Model.Logo)" style="max-width: 75%; max-height: 70px" />
+                        }
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" style="color:#b0bdd6">
+                    <td align="right" style="width: 60px; color: #b0bdd6">
                         公司简称:
                     </td>
                     <td align="left" style="padding-left: 5px; color: #6f7b91">
-                        西安.斯维尔
+                        @Model.SName
                     </td>
                 </tr>
             </table>
@@ -181,27 +204,27 @@
         <div class="div_fx_bottom">
             <table cellpadding="0" cellspacing="0" class="tab_fx">
                 <tr style="">
-                    <td align="right" style="width: 60px;color:#b0bdd6"  >
+                    <td align="right" style="width: 60px; color: #b0bdd6">
                         分享标题:
                     </td>
                     <td align="left" style="padding-left: 5px; color: #6f7b91">
-                       阿斯蒂芬阿斯蒂芬XXX下下下下下下下
+                        @Model.ShareTitle
                     </td>
                 </tr>
                 <tr>
-                    <td align="right"  style="color:#b0bdd6">
+                    <td align="right" style="color: #b0bdd6">
                         分享备注:
                     </td>
                     <td align="left" style="padding-left: 5px; color: #6f7b91">
-                        XXXXXXXXXXXXX下下下下下下XXXX
+                        @Model.ShareRemark
                     </td>
                 </tr>
-                 <tr>
-                    <td align="right"  style="color:#b0bdd6">
+                <tr>
+                    <td align="right" style="color: #b0bdd6">
                         入口名称:
                     </td>
                     <td align="left" style="padding-left: 5px; color: #6f7b91">
-                        我要看房
+                        @Model.ButtonName
                     </td>
                 </tr>
             </table>
@@ -220,7 +243,14 @@
             首页背景图片
         </div>
         <div class="div_fx_bottom">
-            <img src="../../Image/AppDefault.png" style="max-width: 100%" />
+            @if (string.IsNullOrEmpty(Model.BgImage))
+            {
+                <img src="@Url.Content("/Image/AppDefault.png")" style="max-width: 100%;" />
+            }
+            else
+            {
+                <img src="@Url.Content(Model.BgImage)" style="max-width: 100%; " />
+            }
         </div>
         <div class="popups">
             <a href="#example3">
@@ -233,24 +263,135 @@
     <div style="clear: both">
     </div>
 </div>
-<div class="Share">
+<div class="Share" style="display: none">
     报表展示
 </div>
-
 <div style="display: none;">
+    <style>
+        .div_exTitle
+        {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .tab_ex1
+        {
+            width: 100%;
+            line-height: 18px;
+            background: #fffeee;
+        }
+        .tab_ex1 td
+        {
+            width: 100%;
+            line-height: 18px;
+            height: 35px;
+        }
+    </style>
     <div id="example1">
-        <div >
-            1
+        <div style="height: 200px">
+            <div class="div_exTitle">
+                企业信息</div>
+            @using (Html.BeginForm("UpEnterpriseInfo", "Default", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <table cellpadding="0" cellspacing="0" class="Tab_info">
+                    <tr>
+                        <td style="width: 100px; height: 55px">
+                            企业Logo:
+                        </td>
+                        <td>
+                            @Html.HiddenFor(a=>a.Logo)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            企业简称:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(a => a.SName, new { style = "width:85%" })
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <input type="submit" id="sub_EnterpriseInfo" class="input_button" value="保存" />
+                </div>
+            }
         </div>
     </div>
     <div id="example2">
-        <div >
-            2
+        <div style="height: 230px">
+            <div class="div_exTitle">
+                分享设置</div>
+            @using (Html.BeginForm("UpShareInfo", "Default", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <table cellpadding="0" cellspacing="0" class="Tab_info">
+                    <tr>
+                        <td style="width: 100px;">
+                            分享标题:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(a => a.ShareTitle, new { style = "width:85%" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            分享备注:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(a => a.ShareRemark, new { style = "width:85%" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            入口名称:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(a => a.ButtonName, new { style = "width:85%" })
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <input type="submit" id="sub_ShareInfo" class="input_button" value="保存" />
+                </div>
+            }
         </div>
     </div>
     <div id="example3">
-        <div>
-           3
+        <div style="height: 460px">
+            <div class="div_exTitle">
+                首页背景图片</div>
+            @using (Html.BeginForm("UpBgImage", "Default", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <table cellpadding="0" cellspacing="0" class="Tab_info">
+                    <tr>
+                        <td style="width: 1px">
+                        </td>
+                        <td>
+                            @if (string.IsNullOrEmpty(Model.BgImage))
+                            {
+                                <img src="@Url.Content("/Image/AppDefault.png")" style="max-width: 300px; max-height:300px" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content(Model.BgImage)" style="max-width: 300px; max-height:300px " />
+                            }
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <input type="submit" id="sub_BgImage" class="input_button" value="保存" />
+                </div>
+            }
+        </div>
+    </div>
+    <div id="example4">
+        <div style="height: 430px">
+            <div style="width: 100%; text-align: center; font-weight: bold; font-size: 20px;
+                margin-top: 10px">
+                手机扫描二维码</div>
+            <img src="@Url.Action("GetQrCode", "Default")" style=" width:400px" />
         </div>
     </div>
 </div>

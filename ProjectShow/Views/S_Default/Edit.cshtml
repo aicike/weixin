@@ -1,8 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_SystemMainLayot.cshtml";
 }
-
-
 @section head{
     <script>
         $(function () {
@@ -11,6 +9,16 @@
             var Permanent = "@Model.Permanent";
             $("#Status").val(stauts)
             $("#Permanent").val(Permanent)
+
+
+            var EUserName = "@ViewBag.EUserName";
+            var EUserPwd = "@ViewBag.EUserPwd";
+            var UserID = "@ViewBag.UserID";
+            $("#EUserName").val(EUserName)
+            $("#EUserPwd").val(EUserPwd)
+            $("#UserID").val(UserID)
+
+           
 
             $("#ClosingDate").datepicker({
                 changeMonth: true,
@@ -40,7 +48,6 @@
 
         });
     </script>
-
 }
 @model Entity.Enterprise
 <div class="Div_Title">
@@ -57,6 +64,8 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(a => a.EName)
+                    @Html.HiddenFor(a => a.ID);
+                    @Html.HiddenFor(a => a.CreteDate);
                 </td>
                 <td>
                     @Html.ValidationMessageFor(a => a.EName)
@@ -88,12 +97,35 @@
                 <td>
                 </td>
             </tr>
-            <tr id="tr_closingDate" >
+            <tr id="tr_closingDate">
                 <td>
                     使用截止日期：
                 </td>
                 <td>
                     @Html.TextBoxFor(a => a.ClosingDate)
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    登陆账号：
+                </td>
+                <td>
+                    <input type="text" id="EUserName" name="EUserName" />
+                    （长度 6-20）
+                    <input type="hidden" id="UserID" name="UserID" />
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    登陆密码：
+                </td>
+                <td>
+                    <input type="text" id="EUserPwd" name="EUserPwd" />
+                    （长度 6-20）
                 </td>
                 <td>
                 </td>
@@ -106,4 +138,3 @@
         </div>
     }
 </fieldset>
-
