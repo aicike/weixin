@@ -17,7 +17,7 @@ namespace ProjectShow.Controllers
         public ActionResult Index(int? id)
         {
             ProjectModel pmodel = new ProjectModel();
-            var list = pmodel.GetProjectByEID(1).ToPagedList(id ?? 1, 15);
+            var list = pmodel.GetProjectByEID(LoginAccount.EnterpriseID).ToPagedList(id ?? 1, 15);
             return View(list);
         }
 
