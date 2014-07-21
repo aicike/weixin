@@ -11,7 +11,7 @@ namespace System.Web.Mvc
 {
     public class BaseController : Controller
     {
-        public ContentResult Alert(Result dialog)
+        public JavaScriptResult Alert(Result dialog)
         {
             string str = "";
             if (dialog.HasError)
@@ -22,7 +22,7 @@ namespace System.Web.Mvc
             {
                 str = string.Format("jMessage('{0}')",dialog.Error);
             }
-            return Content(str);
+            return JavaScript(str);
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

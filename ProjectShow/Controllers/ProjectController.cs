@@ -36,7 +36,7 @@ namespace ProjectShow.Controllers
             var result = pmodel.Add(project);
             if (result.HasError)
             {
-                return JavaScript(AlertJS_NoTag(new Dialog(result.Error)));
+                return Alert(result);
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "Project") + "'");
         }

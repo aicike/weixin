@@ -8,7 +8,7 @@ using System.Web.Routing;
 
 namespace ProjectShow.Controllers.BaseCon
 {
-    public class EnterpriseBaseController : Controller
+    public class EnterpriseBaseController : BaseController
     {
         protected EUser LoginAccount
         {
