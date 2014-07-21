@@ -6,6 +6,7 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=K57DtY3SfG18CP6N7RxCkyRv"></script>
 <script>
     $(function () {
+        $("#IsEnabled").val("true");
         $(".radio").change(function () {
             if ($(".raion:checked").val() == 1) {
                 $("#IsEnabled").val("true");
@@ -109,7 +110,8 @@
             var lng = $("#Lng").val();
             var lat = $("#Lat").val();
             if (lng.length <= 0 || lat.length <= 0) {
-                JMessage("请拖动地图中的红点，进行地理定位。",true);
+                JMessage("请拖动地图中的红点，进行地理定位。", true);
+                return false;
             }
         });
     });

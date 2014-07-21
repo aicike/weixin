@@ -40,5 +40,7 @@ namespace ProjectShow.Controllers
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "Project") + "'");
         }
+
+
     }
 }
