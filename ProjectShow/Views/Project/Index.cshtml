@@ -28,11 +28,12 @@
             <td>
                 @item.PName
             </td>
-            <td  class="Operation">
+            <td class="Operation">
                 <a>点击查看</a>
             </td>
-            <td  class="Operation">
-                <a>客户信息</a>
+            <td class="Operation">
+                <a href="@Url.Action("Index", "CustomerInfo", new { PID = item.ID })" target="_blank">
+                    客户信息</a>
             </td>
             <td>
                 @(item.IsEnabled == true ? "启用" : "禁用")
@@ -41,7 +42,7 @@
                 @Html.ActionLink("修改", "Edit", "Project", new { id = item.ID })
                 @Ajax.ActionLink("删除", "Delete", "Project", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "Project", new { id = item.ID }) + "',null)" })
                 <br />
-                <a>你想留下客户哪些信息?</a>
+                @Html.ActionLink("你想留下客户哪些信息", "Index", "CProblem", new { PID = item.ID }, null)
             </td>
         </tr>
     }

@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section head{
+    <script>
+        function OptintModel() {
+            var it = new Object;
+            it.Option = "";
+            return it;
+        }
+        var items = [];
+
+        $(function () {
+
+            $("#ProblemType").change(function () {
+                var radio = "@((int)Entity.Enum.EnumCProblemProblemType.Radio)";
+                var check = "@((int)Entity.Enum.EnumCProblemProblemType.Check)";
+                var val = $(this).val();
+                if (parseInt(val) == parseInt(radio) || parseInt(val) == parseInt(check)) {
+                    $("#tr_option").show();
+                }
+                else {
+                    $("#tr_option").hide();
+                }
+            });
+
+            //添加选项
+            $("#addOption").click(function () {
+
+                var DIVrow = '<div name="div_option"><input name="option" type="text" style=" width:300px" />  <a class="delOption">删除</a></div>';
+
+                $("#div_Option_Main").append($(DIVrow));
+            });
+
+
+            //删除选项
+            $(".delOption").live("click", function () {
+
+                $(this).parent().remove();
+            });
+
+            //提交事件
+         
+
+        });
+
+        function OnSub() {
+            var isOK = true;
+            var radio = "@((int)Entity.Enum.EnumCProblemProblemType.Radio)";
+            var check = "@((int)Entity.Enum.EnumCProblemProblemType.Check)";
+            var val = $("#ProblemType").val();
+            if (parseInt(val) == parseInt(radio) || parseInt(val) == parseInt(check)) {
+               
+                var RowName = $("div[name='div_option']");
+                if (RowName.length <= 0) {
+                    JMessage("请添加选项", true);
+                    return false;
+                }
+                items = [];
+                RowName.each(function (i, n) {
+                    var optionTitle = $(n).find("input[name='option']").val().trim();
+                    var optionCount = 0;
+                    if (optionTitle.length <= 0) {
+                        JMessage("请输入选项", true);
+                        isOK = false;
+                        return false;
+                    }
+
+                    var Om = new OptintModel();
+                    Om.Option = optionTitle;
+                    items.push(Om);
+                });
+                var value = JSON.stringify(items);
+                $("#Options").val(value);
+            }
+            return isOK;
+        }
+
+    </script>
+}
+@model Entity.CProblem
+<div class="Div_Title">
+    项目/产品 -> 添加问题信息
+</div>
+<div class="Div_Title" style="font-size: 18px">
+    项目/产品:@ViewBag.ProjectName
+</div>
+<div>
+    @using (Ajax.BeginForm("Add", "CProblem", null, new AjaxOptions() { UpdateTargetId = "alert" }))
+    {
+        <table class="Tab_info" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="width: 120px">
+                    问题名称：
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.Problem, new { style = "width:95%" })
+                    <input type="hidden" id="ProjectID" name="ProjectID"  value="@ViewBag.PID"/>
+                    <input type="hidden" id="Options" name="Options"/>
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Problem)
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 120px">
+                    问题类型：
+                </td>
+                <td>
+                    <select id="ProblemType" name="ProblemType">
+                        <option value="@((int)Entity.Enum.EnumCProblemProblemType.Text)">文本</option>
+                        <option value="@((int)Entity.Enum.EnumCProblemProblemType.TextArea)">多文本</option>
+                        <option value="@((int)Entity.Enum.EnumCProblemProblemType.Radio)">单选</option>
+                        <option value="@((int)Entity.Enum.EnumCProblemProblemType.Check)">复选</option>
+                    </select>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr id="tr_option" style="display: none">
+                <td>
+                    选项：
+                </td>
+                <td colspan="2" class="Operation">
+                    <div id="div_Option_Main" class="operation">
+                        <div name="div_option">
+                            <input name="option" type="text" style="width: 300px" />
+                            <a class="delOption">删除</a>
+                        </div>
+                    </div>
+                    <div>
+                        <a id="addOption">添加选项</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <input type="submit" id="sub_button" onclick="return OnSub()" class="input_button" value="保存" />
+            <input type="button" value="返回" onclick="window.location.href='@Url.Action("Index", "CProblem", new { PID = ViewBag.PID })'" class="input_button" />
+        </div>
+    }
+</div>

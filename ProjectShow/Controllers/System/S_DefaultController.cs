@@ -133,7 +133,8 @@ namespace ProjectShow.Controllers.System
                     }
                 }
             }
-            return JavaScript("window.location.href='" + Url.Action("Index", "S_Default") + "'");
+
+            return RedirectToAction("Index", "S_Default");
 
         }
 

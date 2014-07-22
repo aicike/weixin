@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
 @section head{
@@ -58,6 +58,7 @@
         
     </style>
 }
+@model Entity.EnterpriseInfo
 <div class="BGDiv" id="BGDiv">
     <img src="@Url.Content("~/Image/AppDefault.png")" style=" width:100%; max-width:100%;" />
 </div>
@@ -65,7 +66,13 @@
         <table class="MainTable" id="MainTable" align="center">
     <tr style="height: 10%">
         <td align="left" style=" padding-left:10px">
-            <img src="../../Image/logo.png" style="height:1.5em" />
+        @if (string.IsNullOrEmpty(Model.Logo))
+        { 
+            <img src="@Url.Content("/Image/logo.png")" style="height:1.5em" />
+        }
+        else { 
+            <img src="@Url.Content(Model.Logo)" style="height:1.5em" />
+        }
         </td>
     </tr>
     <tr style="height: 50%">
@@ -76,12 +83,12 @@
     <tr style="height: 30%">
         <td align="center"  >
              
-              <a href="@Url.Action("ProjectClass", "ProjectShow")"  data-role='none'   class="abutton abutton-orange"><span>我要看房</span></a>
+              <a href="@Url.Action("ProjectClass", "ProjectShow", new {EID= ViewBag.EID })"  data-role='none'   class="abutton abutton-orange"><span>@Model.ButtonName</span></a>
         </td>
     </tr>
     <tr style="height: 5%">
         <td>
-            ©xxxx    西安斯维尔
+            ©@Model.SName    西安斯维尔
         </td>
     </tr>
     <tr style="height: 15%">

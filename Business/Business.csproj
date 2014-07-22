@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\packages\Aspose.Cells.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
@@ -50,8 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Common\DESEncrypt.cs" />
     <Compile Include="Common\QrCodes.cs" />
+    <Compile Include="COptionModel.cs" />
+    <Compile Include="CProblemModel.cs" />
+    <Compile Include="CustomerInfoModel.cs" />
     <Compile Include="EFModel.cs" />
     <Compile Include="EnterpriseInfoModel.cs" />
     <Compile Include="EnterpriseModel.cs" />

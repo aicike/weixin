@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Business;
 
 namespace ProjectShow.Controllers
 {
@@ -19,24 +20,67 @@ namespace ProjectShow.Controllers
         {
             //var s = Newtonsoft.Json.JsonConvert.SerializeObject("a");
             //Newtonsoft.Json.JsonConvert.DeserializeObject(s);
-            return View();
+            EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
+            var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            ViewBag.Title = enterpriseInfo.ShareTitle;
+            //分享信息
+            ViewBag.BgImage = enterpriseInfo.BgImage;
+            ViewBag.ShareTitle = enterpriseInfo.ShareTitle;
+            ViewBag.ShareRemark = enterpriseInfo.ShareRemark;
+            ViewBag.EID = EID;
+            return View(enterpriseInfo);
         }
 
         /// <summary>
         /// 项目/分类页
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectClass()
+        public ActionResult ProjectClass(int EID)
         {
-            return View();
+            EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
+            var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            //企业简称
+            ViewBag.SName = enterpriseInfo.SName;
+            ViewBag.Title = enterpriseInfo.SName;
+            ProjectModel projectModel = new ProjectModel();
+            var projectlist = projectModel.GetProjectByEID(EID);
+            //分享信息
+            ViewBag.BgImage = "";// projectlist.FirstOrDefault().ImageInfos.FirstOrDefault().Path; ;
+            ViewBag.ShareTitle = enterpriseInfo.SName + " 项目展示";
+            ViewBag.ShareRemark = enterpriseInfo.SName + " 项目展示";
+            ViewBag.EID = EID;
+            if (projectlist != null)
+            {
+                if (projectlist.Count() == 1)
+                {
+                    return RedirectToAction("ProjectClassList", "ProjectShow", new { PID = projectlist.FirstOrDefault().ID, EID = EID });
+                }
+            }
+            return View(projectlist.ToList());
         }
 
         /// <summary>
         /// 项目/分类列表页
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectClassList()
+        public ActionResult ProjectClassList(int PID, int EID)
         {
+            ProjectModel projectModel = new ProjectModel();
+            var project = projectModel.Get(PID);
+            ViewBag.Title = project.PName;
+            //分享信息
+            ViewBag.BgImage = "";
+            ViewBag.ShareTitle = project.PName;
+            ViewBag.ShareRemark = project.PName;
+            //菜单信息
+            ViewBag.Phone = project.Phone;
+            ViewBag.Lat = project.Lat;
+            ViewBag.Lng = project.Lng;
+            ViewBag.PName = project.PName;
+            ViewBag.MapAddress = project.MapAddress;
+
+            ViewBag.PID = PID;
+            ViewBag.EID = EID;
             return View();
         }
 
@@ -44,9 +88,26 @@ namespace ProjectShow.Controllers
         /// 详细信息展示页
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectInfo()
+        public ActionResult ProjectInfo(int AID, int PID, int EID)
+        {
+            //分享信息
+            ViewBag.BgImage = "";
+            ViewBag.ShareTitle = "";
+            ViewBag.ShareRemark = "";
+            ViewBag.EID = EID;
+            return View();
+        }
+
+        /// <summary>
+        /// 客户提交信息页面
+        /// </summary>
+        /// <param name="PID"></param>
+        /// <param name="EID"></param>
+        /// <returns></returns>
+        public ActionResult CustomerInfo(int PID, int EID)
         {
             return View();
+        
         }
 
     }

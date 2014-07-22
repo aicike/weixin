@@ -47,6 +47,9 @@ namespace Entity
         public virtual ICollection<EnterpriseInfo> EnterpriseInfo { get; set; }
         public virtual ICollection<Project> Project { get; set; }
         public virtual ICollection<EUser> EUser { get; set; }
+        public virtual ICollection<CProblem> CProblem { get; set; }
+        public virtual ICollection<COption> COption { get; set; }
+        public virtual ICollection<CustomerInfo> CustomerInfo { get; set; }
 
 
         #endregion

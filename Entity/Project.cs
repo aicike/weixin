@@ -54,5 +54,9 @@ namespace Entity
         public virtual ICollection<ImageInfo> ImageInfos { get; set; }
 
 
+        public virtual ICollection<CProblem> CProblem { get; set; }
+
+        public virtual ICollection<CustomerInfo> CustomerInfo { get; set; }
+
     }
 }
