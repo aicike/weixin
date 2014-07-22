@@ -42,10 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="COption .cs" />
+    <Compile Include="CProblem.cs" />
+    <Compile Include="CustomerInfo.cs" />
     <Compile Include="Enterprise.cs" />
     <Compile Include="EnterpriseInfo.cs" />
+    <Compile Include="Enum\EnumCProblemProblemType.cs" />
     <Compile Include="EUser.cs" />
     <Compile Include="ImageInfo.cs" />
+    <Compile Include="_Json_Problem_Option.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Session\AccountSession.cs" />
     <Compile Include="Session\SystemSession.cs" />

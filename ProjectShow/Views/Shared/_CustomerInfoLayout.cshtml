@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="@Url.Content("/Scripts/jquery-1.8.3.min.js")"  type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/topbar/juery.topbar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/common.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.validate-vsdoc.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.3.custom.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JqueryUI/jquery.ui.core.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JqueryUI/jquery.ui.widget.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JqueryUI/jquery.ui.datepicker.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JqueryUI/i18n/jquery.ui.datepicker-zh-CN.js")" type="text/javascript"></script>
+    <script>
+        $(function () {
+            SetMainHeight()
+
+            $("#outs").click(function () {
+                if (confirm("你确定要退出吗？")) {
+                    window.location.href= "@Url.Action("Outs","Default")";
+                }
+
+            });
+        });
+        
+        window.onresize = function () {
+            SetMainHeight()
+        }
+
+        function SetMainHeight() {
+            $("#Main_div").css("height", $(window).height() + "px");
+        }
+    </script>
+    <style>
+        body
+        {
+            margin: 0px;
+            color: #6f7b91;
+        }
+        .header
+        {
+            margin-top: 35px;
+            height: 55px;
+            width: 960px;
+            background: #8895b4;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .topHead_left
+        {
+            float: left;
+            height: 55px;
+            line-height: 55px;
+            overflow: hidden;
+        }
+        
+        .topHead_right
+        {
+            float: right;
+            width: 210px;
+            height: 55px;
+            background: #7a85a2;
+            color: #fff;
+            line-height: 55px;
+            overflow: hidden;
+            text-align: center;
+            font-size: 14px;
+        }
+        .topHead_right a
+        {
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .MeunA
+        {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 14px;
+            margin-right: 10px;
+            padding: 20px 0px;
+        }
+        .MeunA_Sel
+        {
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 20px 0px;
+        }
+        .MeunA:hover
+        {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        
+        .Div_Title
+        {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        .main
+        {
+            width: 100%;
+            min-height: 680px;
+            background: #f0f4fb;
+            margin-bottom: 25px;
+        }
+        .TitleDIV
+        {
+            height: 40px;
+        }
+        .TitleDIV a
+        {
+            height: 40px;
+            background: #4fc2b9;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .Tab_list
+        {
+            background:#fff;
+            width: 100%;
+            box-shadow: #9fa4c9 0px 0px 10px;
+            line-height: 18px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .Tab_list th
+        {
+            border-bottom: 1px solid #d3d5e6;
+             background-image: linear-gradient( #f6f7fb, #e5e7f2);
+            height: 35px;
+            padding-left: 20px;
+            text-align: left;
+            font-weight: normal;
+            font-size: 14px;
+        }
+        .Tab_list td
+        {
+            height: 30px;
+            padding-left: 20px;
+            font-size: 12px;
+            border-bottom: 1px solid #d3d5e6;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .Tab_list tr:hover
+        {
+            background-color: #f6f7fb ;
+           
+        }
+        .Tab_list tr:hover td:first-child
+        {
+             background-image: url(@Url.Content("/Image/tr_Bg.png"));
+            background-repeat:repeat-y; 
+        }
+        .Operation a
+        {
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 12px;
+            color:#a2aecd;
+            cursor: pointer;
+        }
+        .Operation a:hover 
+        {
+            color:#ff8463;
+        }
+        .input_button
+        {
+            min-width:80px;
+            height: 30px;
+            background: #4fc2b9;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            cursor:pointer;
+            margin-right:15px;
+        }
+        fieldset
+        {
+            border: 1px solid #d3d5e6;
+            padding:20px;
+        }
+        .Tab_info
+        {
+            width: 100%;
+            box-shadow: #9fa4c9 0px 0px 10px;
+            line-height: 18px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .Tab_info tr td:first-child
+        {
+            text-align: right;
+            padding-right: 5px;
+            font-weight: bold;
+        }
+        .Tab_info td
+        {
+            height: 35px;
+            padding-left: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+        .Tab_info span
+        {
+            color:#ff8463;
+        }
+        
+        .Tab_info tr:nth-child(odd)
+        {
+            background: #f6f7fb;
+        }
+        .Tab_info tr:nth-child(even)
+        {
+            background: #fff;
+        }
+    </style>
+    @RenderSection("head", required: false)
+    @{
+        var Account = Session[Entity.SystemConst.Session.LoginAccount] as Entity.Session.AccountSession;
+       
+    }
+</head>
+<body>
+    <div id="Main_div" style="width: 100%; overflow: auto">
+        <div style="box-shadow: #9fa4c9 0px 0px 10px; width: 960px; margin: auto auto;">
+            <div class="header">
+                <div class="topHead_left">
+                    <div style="float: left;">
+                        <img src="../../Image/logo_144.png" style="height: 45px; margin-left: 20px; margin-top: 5px;
+                            margin-right: 10px;" />
+                    </div>
+                    <div style="float: left">
+                        
+                            <a class="MeunA_Sel" href="javascript:function(){}">客户信息 </a>
+                        
+                    </div>
+                    
+                    <div style="clear: both">
+                    </div>
+                </div>
+                <div style="clear: both">
+                </div>
+            </div>
+            <table cellpadding="0" cellspacing="0" class="main">
+                <tr valign="top">
+                    <td style="padding: 25px 50px">
+                        @RenderBody()
+                    </td>
+       
+                </tr>
+            </table>
+        </div>
+    </div>
+        <div id="dialog">
+    </div>
+    <div id="alert">
+    </div>
+    <div id="jmessage" style="display: none;">
+    </div>
+</body>
+</html>

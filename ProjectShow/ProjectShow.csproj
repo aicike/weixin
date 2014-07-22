@@ -110,6 +110,8 @@
     <Compile Include="Controllers\BaseCon\BaseController.cs" />
     <Compile Include="Controllers\BaseCon\EnterpriseBaseController.cs" />
     <Compile Include="Controllers\BaseCon\SysetemBaseController.cs" />
+    <Compile Include="Controllers\CProblemController.cs" />
+    <Compile Include="Controllers\CustomerInfoController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Image\a.jpg" />
     <Content Include="Image\AppDefault.png" />
@@ -134,10 +137,12 @@
     <Content Include="Image\c.jpg" />
     <Content Include="Image\close.png" />
     <Content Include="Image\d.jpg" />
+    <Content Include="Image\down.png" />
     <Content Include="Image\hdr-bkg.png" />
     <Content Include="Image\item_line.png" />
     <Content Include="Image\logo.png" />
     <Content Include="Image\Logo_144.png" />
+    <Content Include="Image\up.png" />
     <Content Include="Scripts\BlockSit\blocksit.js" />
     <Content Include="Scripts\BlockSit\homeStyle.css" />
     <Content Include="Scripts\ClassBtn\style.css" />
@@ -336,9 +341,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="File\" />
     <Folder Include="File\Enterprise\1\" />
     <Folder Include="File\Temp\" />
-    <Folder Include="Models\" />
+    <Folder Include="Models\" />    
+    <Folder Include="File\Excel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -400,15 +407,33 @@
     <Content Include="Views\Project\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Project\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\S_Default\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\S_Default\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\CProblem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\CProblem\Add.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CProblem\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CustomerInfo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CustomerInfoLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ProjectShow\CustomerInfo.cshtml" />
+  </ItemGroup>
+   <ItemGroup>
     <None Include="Scripts\plupload-2.0.0\examples\dump.php" />
     <None Include="Scripts\plupload-2.0.0\examples\jquery\s3.php" />
     <None Include="Scripts\plupload-2.0.0\examples\upload.php" />
@@ -432,7 +457,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://imtimelyshow.com:8080/</IISUrl>
+          <IISUrl>http://imtimelyshow.com:8090/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

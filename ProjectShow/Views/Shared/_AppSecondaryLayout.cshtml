@@ -50,7 +50,7 @@
         //屏蔽右键
         document.oncontextmenu = function () { return false; }
         //分享
-        _WXShare('@Url.Content("/Image/AppDefault.png")', '76', '76', '@ViewBag.Title', '@ViewBag.Title', '');
+        _WXShare('@if(string.IsNullOrEmpty(ViewBag.BgImage)){@Url.Content("/Image/AppDefault.png")}else{@Url.Content(ViewBag.BgImage)}', '76', '76', '@ViewBag.ShareTitle', '@ViewBag.ShareRemark', '');
 
     </script>
     <style>
@@ -120,20 +120,20 @@
             </div>
         </div>
         <div class="PathItem">
-            <a class="link" onclick="" title="报名预约" data-role='none'><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_pic.png);
+            <a class="link" href="@Url.Action("CustomerInfo", "ProjectShow", new { PID = ViewBag.PID, EID = ViewBag.EID })" title="报名预约" data-role='none'><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_pic.png);
                 -moz-transform: rotate(0deg);" data-transform="rotate(0deg)"></span></a>
         </div>
         <div class="PathItem">
-            <a class="link" href="tel:18706747231" title="打电话"><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_info.png);
+            <a class="link" href="tel:@ViewBag.Phone" title="打电话"><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_info.png);
                 -moz-transform: rotate(0deg);" data-transform="rotate(0deg)"></span></a>
         </div>
         <div class="PathItem">
-            <a class="link" href="http://api.map.baidu.com/marker?location=34.228268,108.968764&title=大雁塔&name=大雁塔&content=陕西省, 西安市, 雁塔区, 小寨东路, 8号&output=html"
+            <a class="link" href="http://api.map.baidu.com/marker?location=@ViewBag.Lat,@ViewBag.Lng&title=@ViewBag.PName&name=@ViewBag.PName&content=@ViewBag.MapAddress&output=html"
                 title="地理位置"><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_address.png);
                     -moz-transform: rotate(0deg);" data-transform="rotate(0deg)"></span></a>
         </div>
         <div class="PathItem">
-            <a class="link" href="Index" title="首页"><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_price.png);
+            <a class="link" href="@Url.Action("ProjectClass", "ProjectShow", new { EID = ViewBag.EID })" title="首页"><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_price.png);
                 -moz-transform: rotate(0deg);" data-transform="rotate(0deg)"></span></a>
         </div>
     </div>

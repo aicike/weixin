@@ -48,7 +48,7 @@
         //屏蔽右键
         document.oncontextmenu = function () { return false; }
         //分享
-        _WXShare('@Url.Content("/Image/AppDefault.png")', '76', '76', '@ViewBag.Title', '@ViewBag.Title', '');
+        _WXShare('@if(string.IsNullOrEmpty(ViewBag.BgImage)){@Url.Content("/Image/AppDefault.png")}else{@Url.Content(ViewBag.BgImage)}', '76', '76', '@ViewBag.ShareTitle', '@ViewBag.ShareRemark', '');
 
     </script>
     <style>
@@ -104,6 +104,7 @@
 <body>
     <div data-role="page">
         @RenderBody()
+       
     </div>
 </body>
 </html>

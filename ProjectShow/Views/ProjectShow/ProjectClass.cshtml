@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "ProjectClass";
+    
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
 @section head{
@@ -9,7 +9,7 @@
         var color = ["#66CDAA", "#AB82FF", "#5CACEE", "#EEB422", "#FF8247"];
         var colorIndex = 0;
         $(function () {
-            
+
 
             //            //控制颜色
             //            $(".MainTab").each(function(){
@@ -28,7 +28,7 @@
                 $('.BlocksIt').BlocksIt({
                     numOfCol: 1,
                     offsetX: 0,
-                    offsetY: 8,
+                    offsetY: 6,
                     blockElement: ".grid"
 
                 });
@@ -55,7 +55,7 @@
         .grid
         {
             width: 100% !important;
-            overflow:hidden;
+            overflow: hidden;
             border-radius: 5px;
         }
         
@@ -64,26 +64,41 @@
             width: 100%;
             max-width: 100%;
         }
+        .PnameBg
+        {
+            width: 130px;
+            height: 50px;
+            text-align: center;
+            color: #fff;
+            left: 0px;
+            top: 25px;
+            position: absolute;
+            font-weight: bold;
+            font-size: 1.4em;
+            line-height: 50px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.4);
+            text-decoration: none;
+        }
     </style>
 }
-<div data-role="content" style="padding-top: 0px; padding-left:10px; padding-right:10px">
-    <div class="BlocksIt" style=" display:none">
-        <div class="grid">
-            <a href="ProjectClassList"> <img src="../../Image/a.jpg" /></a>
-            <div style=" height:50px; color:#fff; left:0px; top:20px; position:absolute">
-                asdfsdf
+@model List<Entity.Project>
+<div data-role="content" style="padding-top: 0px; padding-left: 10px; padding-right: 10px">
+    <div class="BlocksIt" style="display: none">
+        @foreach (var item in Model)
+        {
+            <div class="grid">
+                <a href="@Url.Action("ProjectClassList", "ProjectShow", new { PID = item.ID, EID = ViewBag.EID })" style=" text-decoration:none">
+                    <img src="../../Image/b.jpg" />
+                </a>
+                <div class="PnameBg">
+                    @item.PName
+                </div>
             </div>
-
-        </div>
-        <div class="grid">
-            <img src="../../Image/b.jpg" />
-        </div>
-        <div class="grid">
-            <img src="../../Image/c.jpg" />
-        </div>
+        }
     </div>
 </div>
 <div style="text-align: center; height: 30px; background-image: url('/Image/item_line.png');
     background-repeat: repeat-x; padding-top: 10px">
-    ©xxxx 西安斯维尔
+    ©@ViewBag.SName 西安斯维尔
 </div>
