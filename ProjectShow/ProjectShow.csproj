@@ -341,11 +341,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="File\" />
     <Folder Include="File\Enterprise\1\" />
-    <Folder Include="File\Temp\" />
-    <Folder Include="Models\" />    
     <Folder Include="File\Excel\" />
+    <Folder Include="File\Temp\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -433,7 +432,7 @@
   <ItemGroup>
     <Content Include="Views\ProjectShow\CustomerInfo.cshtml" />
   </ItemGroup>
-   <ItemGroup>
+  <ItemGroup>
     <None Include="Scripts\plupload-2.0.0\examples\dump.php" />
     <None Include="Scripts\plupload-2.0.0\examples\jquery\s3.php" />
     <None Include="Scripts\plupload-2.0.0\examples\upload.php" />
@@ -453,7 +452,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
