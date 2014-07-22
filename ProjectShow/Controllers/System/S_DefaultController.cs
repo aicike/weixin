@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ProjectShow.Controllers.BaseCon;
 using Entity;
 using Business;
+using System.IO;
 
 namespace ProjectShow.Controllers.System
 {
@@ -60,7 +61,15 @@ namespace ProjectShow.Controllers.System
                     entinfo.PreviewCnt = 0;
                     entinfo.EnterpriseID = enterprise.ID;
                     entinfoModel.Add(entinfo);
+                    //创建企业图片文件夹
+                    string File = Server.MapPath("/File/" + enterprise.ID);
+                    if (!Directory.Exists(File))//判断文件夹是否存在 
+                    {
+                        Directory.CreateDirectory(File);//不存在则创建文件夹 
+                    }
+
                 }
+                
                 return JavaScript("window.location.href='" + Url.Action("Index", "S_Default") + "'");
             }
 

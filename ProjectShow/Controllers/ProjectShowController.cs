@@ -20,8 +20,10 @@ namespace ProjectShow.Controllers
         {
             //var s = Newtonsoft.Json.JsonConvert.SerializeObject("a");
             //Newtonsoft.Json.JsonConvert.DeserializeObject(s);
+            //企业基本信息
             EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
             var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            //title 标题
             ViewBag.Title = enterpriseInfo.ShareTitle;
             //分享信息
             ViewBag.BgImage = enterpriseInfo.BgImage;
@@ -41,6 +43,7 @@ namespace ProjectShow.Controllers
             var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
             //企业简称
             ViewBag.SName = enterpriseInfo.SName;
+            //title 标题
             ViewBag.Title = enterpriseInfo.SName;
             ProjectModel projectModel = new ProjectModel();
             var projectlist = projectModel.GetProjectByEID(EID);
@@ -51,6 +54,7 @@ namespace ProjectShow.Controllers
             ViewBag.EID = EID;
             if (projectlist != null)
             {
+                //如果企业只有一个项目/产品 则直接跳转到该项目/产品列表下
                 if (projectlist.Count() == 1)
                 {
                     return RedirectToAction("ProjectClassList", "ProjectShow", new { PID = projectlist.FirstOrDefault().ID, EID = EID });
@@ -94,6 +98,8 @@ namespace ProjectShow.Controllers
             ViewBag.BgImage = "";
             ViewBag.ShareTitle = "";
             ViewBag.ShareRemark = "";
+
+            ViewBag.PID = PID;
             ViewBag.EID = EID;
             return View();
         }
@@ -106,6 +112,18 @@ namespace ProjectShow.Controllers
         /// <returns></returns>
         public ActionResult CustomerInfo(int PID, int EID)
         {
+            EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
+            var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            //分享信息
+            ViewBag.BgImage = enterpriseInfo.BgImage;
+            ViewBag.ShareTitle =enterpriseInfo.SName+ "留下您的信息";
+            ViewBag.ShareRemark = enterpriseInfo.SName + "留下您的信息";
+            ProjectModel projectModel = new ProjectModel();
+            var project = projectModel.Get(PID);
+            ViewBag.Title = project.PName;
+
+            CProblemModel cproblemModel = new CProblemModel();
+
             return View();
         
         }
