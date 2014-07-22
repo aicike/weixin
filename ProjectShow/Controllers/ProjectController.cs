@@ -36,8 +36,25 @@ namespace ProjectShow.Controllers
         public ActionResult Add(Project project)
         {
             ProjectModel pmodel = new ProjectModel();
-
             project.EnterpriseID = LoginAccount.EnterpriseID;
+
+            var hidImages = Request.Form["hidImages"];
+            if (!string.IsNullOrEmpty(hidImages))
+            {
+                string[] images = hidImages.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                if (images != null)
+                {
+                    List<ImageInfo> imageList = new List<ImageInfo>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        ImageInfo ii = new ImageInfo();
+                        ii.Path = images[i];
+                        imageList.Add(ii);
+                    }
+                    project.ImageInfos = imageList;
+                }
+            }
+
             var result = pmodel.Add(project);
             if (result.HasError)
             {
@@ -73,16 +90,23 @@ namespace ProjectShow.Controllers
             var files = Request.Files;
             if (Request.Files.Count > 0)
             {
-                string savePath = null;
                 var f = Request.Files[0];
-                bool isOk= ToolImage.SuperGetPicThumbnail(f,out savePath, 70, 800, 0, SmoothingMode.HighQuality, CompositingQuality.HighQuality, InterpolationMode.High);
+                string path = "/File/Enterprise/" + LoginAccount.EnterpriseID + "/" + DateTime.Now.ToString("yyyy-MM-dd");
+                string fileName = "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + f.FileName; 
+                string TempPath = Server.MapPath(path);
+                if (Directory.Exists(TempPath) == false)
+                {
+                    Directory.CreateDirectory(TempPath);
+                }
+                string showPath = path + fileName;
+                string savePath = TempPath + fileName;
+                bool isOk = ToolImage.SuperGetPicThumbnail(f, ref savePath, 70, 800, 0, SmoothingMode.HighQuality, CompositingQuality.HighQuality, InterpolationMode.High);
                 if (isOk)
                 {
-                    return Json(new { jsonrpc = "2.0", result = savePath });
-
-                    //return "({'jsonrpc' : '2.0', 'result' : " + savePath + ", 'id' : 'id'})";
+                    return Json(new { jsonrpc = "2.0", result = showPath });
                 }
-                else {
+                else
+                {
                     //return "({'jsonrpc' : '2.0', 'error' : {'code': 103, 'message': '文件上传失败。'}, 'id' : 'id'})";
                     return Json(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
                 }
@@ -91,7 +115,6 @@ namespace ProjectShow.Controllers
             {
                 return Json(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
             }
-            return null;
         }
     }
 }

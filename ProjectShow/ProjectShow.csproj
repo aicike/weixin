@@ -132,6 +132,7 @@
     <Content Include="Image\bg2.gif" />
     <Content Include="Image\body-bkg.png" />
     <Content Include="Image\c.jpg" />
+    <Content Include="Image\close.png" />
     <Content Include="Image\d.jpg" />
     <Content Include="Image\hdr-bkg.png" />
     <Content Include="Image\item_line.png" />

@@ -109,14 +109,35 @@
         } catch (e) {
 
         }
-        $("#btnSubmit").click(function () {
+
+        $("#btnTemp").click(function () {
+            uploader.start();
+        });
+
+         $("#btnSubmit").click(function () {
             var lng = $("#Lng").val();
             var lat = $("#Lat").val();
             if (lng.length <= 0 || lat.length <= 0) {
                 JMessage("请拖动地图中的红点，进行地理定位。", true);
                 return false;
             }
+            var l= $(".imgProject").length;
+            if(l<=0){
+                JMessage("请上传项目图片。", true);
+                return false;
+            }
+            var images="";
+            $(".imgProject").each(function(m,n){
+                images+=$(this).attr("src")+"|";
+            
+            });
+            $("#hidImages").val(images);
+            return true;
         });
+
+//        $(".imgClose").live("click",function(){
+//            $(this).parent().remove();
+//        });
 
 
         var url_swf = '@Url.Content("/plupload-2.0.0/js/Moxie.swf")';
@@ -142,10 +163,10 @@
                 PostInit: function () {
                     document.getElementById('filelist').innerHTML = '';
 
-                    document.getElementById('uploadfiles').onclick = function () {
-                        uploader.start();
-                        return false;
-                    };
+//                    document.getElementById('uploadfiles').onclick = function () {
+//                        uploader.start();
+//                        return false;
+//                    };
                 },
 
                 FilesAdded: function (up, files) {
@@ -165,11 +186,13 @@
                 UploadComplete: function (up, files) {
 //                    console.log(up);
 //                    console.log(files);
+                      $("#btnSubmit").click();
                 },
                 FileUploaded: function (up, file, info) {
 					//一个文件上传成功
                     var filePath=JSON.parse(info.response).result;
-                    $("#divImg").append('<img style="width:50px;height:50px;margin-right:10px;" src="'+filePath+'"/>');
+                    var html='<div style="position:relative;margin-right: 15px;float:left"><img class="imgProject" src="'+filePath+'"/></div>';
+                    $("#divImg").append(html);
 				},
             }
         });
@@ -177,84 +200,94 @@
         uploader.init();
     });
 </script>
+<style>
+    .imgProject
+    {
+        width: 70px;
+        height: 70px;
+        border: 1px solid #d0d0d0;
+    }
+</style>
 <div class="Div_Title">
     项目管理 -> 添加项目
 </div>
-<fieldset style="font-size: 14px">
 @*@using (Html.BeginForm("Add", "Project", null, FormMethod.Post, new { enctype = "multipart/form-data" }))*@
-    @using (Ajax.BeginForm("Add", "Project", null, new AjaxOptions() { UpdateTargetId = "alert" }, new { enctype = "multipart/form-data" }))
-    {
-        <table class="Tab_info" cellpadding="0" cellspacing="0">
-            <tr>
-                <td style="width: 100px">
-                    <span class="Identification">*</span> 项目名称：
-                </td>
-                <td>
-                    @Html.TextBoxFor(a => a.PName)
-                </td>
-                <td>@Html.ValidationMessageFor(a => a.PName)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="Identification">*</span> 项目电话：
-                </td>
-                <td class="tdField">@Html.TextBoxFor(a => a.Phone)
-                </td>
-                <td>@Html.ValidationMessageFor(a => a.Phone)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="Identification">*</span> 状态：
-                </td>
-                <td>@Html.HiddenFor(a => a.IsEnabled)
-                    <input type="radio" id="radio1" class="radio" checked="checked" value="1" name="radio" /><label
-                        for="radio1">启用</label><input type="radio" id="radio2" class="radio" value="2" name="radio" /><label
-                            for="radio2">禁用</label>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="Identification">*</span> 地理位置：
-                </td>
-                <td colspan="2">
-                    <div id="allmap" style="width: 460px; height: 290px; border: 1px solid #000">
-                    </div>
-                    @Html.HiddenFor(a => a.Lng)
-                    @Html.HiddenFor(a => a.Lat)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="Identification">*</span> 坐标地址：
-                </td>
-                <td>
-                    @Html.TextBoxFor(a => a.MapAddress)
-                </td>
-                <td>@Html.ValidationMessageFor(a => a.MapAddress)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="Identification">*</span> 项目图片：
-                </td>
-                <td colspan="2">
-                    <div id="filelist">
-                        Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
-                    <div id="container">
-                        <div id="divImg">
-                        </div>
-                        <a id="pickfiles" href="javascript:;">[选择文件]</a> <a id="uploadfiles" href="javascript:;">
-                            [上传文件]</a>
-                    </div>
-                    <pre id="console"></pre>
-                </td>
-            </tr>
-        </table>
-        <div>
-            <input type="submit" id="btnSubmit" value="保存" class="input_button" style="margin-right: 20px" /><input type="button" value="返回" class="input_button" onclick="location.href='@ViewBag.RawUrl'" />
-        </div>
-    }
+@using (Ajax.BeginForm("Add", "Project", null, new AjaxOptions() { UpdateTargetId = "alert" }, new { enctype = "multipart/form-data" }))
+{
+    <table class="Tab_info" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width: 100px">
+                <span class="Identification">*</span> 项目名称：
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.PName)
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.PName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 项目电话：
+            </td>
+            <td class="tdField">@Html.TextBoxFor(a => a.Phone)
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.Phone)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 状态：
+            </td>
+            <td>@Html.HiddenFor(a => a.IsEnabled)
+                <input type="radio" id="radio1" class="radio" checked="checked" value="1" name="radio" /><label
+                    for="radio1">启用</label><input type="radio" id="radio2" class="radio" value="2" name="radio" /><label
+                        for="radio2">禁用</label>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 地理位置：
+            </td>
+            <td colspan="2">
+                <div id="allmap" style="width: 460px; height: 290px; border: 1px solid #000;">
+                </div>
+                @Html.HiddenFor(a => a.Lng)
+                @Html.HiddenFor(a => a.Lat)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 坐标地址：
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.MapAddress)
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.MapAddress)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="Identification">*</span> 项目图片：<br />
+            </td>
+            <td colspan="2">
+                <div id="divImg">
+                </div>
+                <input type="hidden" name="hidImages" id="hidImages" />
+                <div style="clear: both">
+                </div>
+                <div id="filelist">
+                </div>
+                <div id="container">
+                    <a id="pickfiles" href="javascript:;">[选择文件]</a> (可传多张)
+                </div>
+                <pre id="console"></pre>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input type="button" id="btnTemp" value="保存" class="input_button" style="margin-right: 20px" />
+        <input type="submit" id="btnSubmit" value="保存" class="input_button" style="display: none" /><input type="button" value="返回" class="input_button" onclick="location.href='@ViewBag.RawUrl'" />
+    </div>
+}

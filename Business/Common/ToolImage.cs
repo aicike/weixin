@@ -17,7 +17,7 @@ namespace Business.Common
         /// 裁剪，压缩方法 传Image对象
         /// </summary>
         /// <param name="imgSrc">原始图片</param>
-        /// <param name="SavePath">保存路径</param>
+        /// <param name="SavePath">保存路径(null表示存在临时目录，有值则保存在值所在目录)</param>
         /// <param name="flag">压缩比例，一般设置在70-100之间</param>
         /// <param name="thumbWidth">缩略图宽度 无 传0</param>
         /// <param name="thumbHeight">缩略图高度 无 传0</param>
@@ -25,7 +25,7 @@ namespace Business.Common
         /// <param name="cq">影像合成</param>
         /// <param name="im">图片质量</param>
         /// <returns></returns>
-        public static bool SuperGetPicThumbnail(HttpPostedFileBase oldFile,out string SavePath, int flag, int thumbWidth, int thumbHeight, SmoothingMode sm = SmoothingMode.HighQuality, CompositingQuality cq = CompositingQuality.HighQuality, InterpolationMode im = InterpolationMode.High)
+        public static bool SuperGetPicThumbnail(HttpPostedFileBase oldFile, ref string SavePath, int flag, int thumbWidth, int thumbHeight, SmoothingMode sm = SmoothingMode.HighQuality, CompositingQuality cq = CompositingQuality.HighQuality, InterpolationMode im = InterpolationMode.High)
         {
             int dataLengthToRead = (int)oldFile.InputStream.Length;//获取下载的文件总大小
             byte[] buffer = new byte[dataLengthToRead];
@@ -122,15 +122,22 @@ namespace Business.Common
                 }
 
                 #region 创建临时文件夹
-
-                string Path = "/File/Temp/" + DateTime.Now.ToString("yyyy-MM-dd");
-                string TempPath = HttpContext.Current.Server.MapPath(Path);
-                if (Directory.Exists(TempPath) == false)
+                string Path = null;
+                string sPath = null;
+                if (SavePath == null)
                 {
-                    Directory.CreateDirectory(TempPath);
+                    Path = "/File/Temp/" + DateTime.Now.ToString("yyyy-MM-dd"); string TempPath = HttpContext.Current.Server.MapPath(Path);
+                    if (Directory.Exists(TempPath) == false)
+                    {
+                        Directory.CreateDirectory(TempPath);
+                    }
+                    string filename = "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + oldFile.FileName;
+                    SavePath = Path + filename;
+                    sPath = TempPath + filename;
                 }
-                SavePath = Path + "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + oldFile.FileName;
-                var sPath = TempPath + "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + oldFile.FileName;
+                else {
+                    sPath = SavePath;
+                }
                 #endregion
 
                 if (jpegICIinfo != null)
