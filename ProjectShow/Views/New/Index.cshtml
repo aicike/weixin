@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "资讯列表";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section head
+{
+    <style>
+        .Tab_list td
+        {
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+        }
+        .Tab_list img
+        {
+            cursor: pointer;
+        }
+        .Tab_list a
+        {
+            text-decoration: none;
+        }
+    </style>
+}
+@model List<Entity.New>
+<div class="TitleDIV">@Html.ActionLink("添加", "Add", "New", new { PID = ViewBag.PID }, null)</div>
+<table class="Tab_list" cellpadding="0" cellspacing="0">
+    <tr>
+        <th style="width: 140px">
+            图片
+        </th>
+        <th style="width: 160px;">
+            标题
+        </th>
+        <th style="width: 45px;">
+            浏览数
+        </th>
+        <th>
+            排序
+        </th>
+        <th>
+            状态
+        </th>
+        <th style="width: 70px;">
+            操作
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Url.Content(item.Image)" style="width:135px;cursor:default" />
+            </td>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.ViewCount
+            </td>
+            <td>
+                @if (Model.Count() == 1)
+                {
+                }
+                else if (item.Sort <= 1)
+                { 
+                    <a  href="@Url.Action("SortUP", "New", new { sort = item.Sort, nid = item.ID })">
+                        <img src="@Url.Content("/Image/up.png")" title="上移" alt="上移" style="width: 25px" />
+                    </a>
+                }
+                else if (item.Sort == ViewBag.MaxSort)
+                {
+                    <a href="@Url.Action("SortDown", "New", new { sort = item.Sort, nid = item.ID })">
+                        <img src="@Url.Content("/Image/down.png")" title="下移" alt="下移" style="width: 25px" />
+                    </a>
+                }
+                else
+                {
+                         
+                    <a href="@Url.Action("SortUP", "New", new { sort = item.Sort, nid = item.ID })">
+                        <img src="@Url.Content("/Image/up.png")" title="上移" alt="上移" style="width: 25px; " />
+                    </a>
+                    <br />
+                    <a  href="@Url.Action("SortDown", "New", new { sort = item.Sort, nid = item.ID })">
+                        <img src="@Url.Content("/Image/down.png")" title="下移" alt="下移" style="width: 25px;" />
+                    </a>
+                }
+            </td>
+            <td>
+                @(item.IsEnabled == true ? "启用" : "禁用")
+            </td>
+            <td class="Operation">
+                @Html.ActionLink("修改", "Edit", "New", new { id = item.ID }, null)
+                @Ajax.ActionLink("删除", "Delete", "New", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "New", new { id = item.ID }) + "',null)" })
+            </td>
+        </tr>
+    }
+</table>

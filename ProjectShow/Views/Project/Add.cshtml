@@ -135,9 +135,17 @@
             return true;
         });
 
-//        $(".imgClose").live("click",function(){
-//            $(this).parent().remove();
-//        });
+        $(".imgClose").live("click",function(){
+            $(this).parent().remove();  
+            var toremove = '';  
+            var id=$(this).attr("data-val");  
+            for(var i in uploader.files){  
+                if(uploader.files[i].id === id){  
+                     toremove = i;  
+                }  
+            }  
+            uploader.files.splice(toremove, 1); 
+        });
 
 
         var url_swf = '@Url.Content("/plupload-2.0.0/js/Moxie.swf")';
@@ -171,7 +179,7 @@
 
                 FilesAdded: function (up, files) {
                     plupload.each(files, function (file) {
-                        document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                        document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <span class="imgClose" style="cursor:pointer" data-val='+ file.id+'>[删除]</span></div>';
                     });
                 },
 
@@ -251,7 +259,7 @@
                 <span class="Identification">*</span> 地理位置：
             </td>
             <td colspan="2">
-                <div id="allmap" style="width: 460px; height: 290px; border: 1px solid #000;">
+                <div id="allmap" style="width: 460px; height: 290px;border: 1px solid #000;">
                 </div>
                 @Html.HiddenFor(a => a.Lng)
                 @Html.HiddenFor(a => a.Lat)

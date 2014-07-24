@@ -64,7 +64,8 @@
     <Compile Include="EnterpriseModel.cs" />
     <Compile Include="EUserModel.cs" />
     <Compile Include="ImageInfoModel.cs" />
-    <Compile Include="ProjectModel.cs" />    
+    <Compile Include="NewModel.cs" />
+    <Compile Include="ProjectModel.cs" />
     <Compile Include="Common\ToolImage.cs" />
     <Compile Include="Common\ExpandMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

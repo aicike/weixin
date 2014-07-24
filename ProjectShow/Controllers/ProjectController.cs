@@ -21,8 +21,17 @@ namespace ProjectShow.Controllers
         public ActionResult Index(int? id)
         {
             ProjectModel pmodel = new ProjectModel();
-            var list = pmodel.GetProjectByEID(LoginAccount.EnterpriseID).ToPagedList(id ?? 1, 15);
+            var list = pmodel.GetProjectByEID(LoginAccount.EnterpriseID).OrderByDescending(a => a.sort).ToPagedList(id ?? 1, 15);
             ViewBag.Menu = 2;
+
+            if (list != null && list.Count() > 0)
+            {
+                ViewBag.MaxSort = list.Max(a => a.sort);
+            }
+            else
+            {
+                ViewBag.MaxSort = 0;
+            }
             return View(list);
         }
 
@@ -54,7 +63,7 @@ namespace ProjectShow.Controllers
                     project.ImageInfos = imageList;
                 }
             }
-
+            project.sort = pmodel.GetMaxSort(LoginAccount.EnterpriseID);
             var result = pmodel.Add(project);
             if (result.HasError)
             {
@@ -76,13 +85,56 @@ namespace ProjectShow.Controllers
         {
             ProjectModel pmodel = new ProjectModel();
             project.EnterpriseID = LoginAccount.EnterpriseID;
-            var result = pmodel.Edit(project);
+            var hidImages = Request.Form["hidImages"];
+            List<ImageInfo> imageList = new List<ImageInfo>();
+            if (!string.IsNullOrEmpty(hidImages))
+            {
+                string[] images = hidImages.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                if (images != null)
+                {
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        ImageInfo ii = new ImageInfo();
+                        ii.ProjectID = project.ID;
+                        ii.Path = images[i];
+                        imageList.Add(ii);
+                    }
+                }
+            }
+            var result = pmodel.Edit(project, imageList);
             if (result.HasError)
             {
                 return Alert(result);
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "Project") + "'");
         }
+
+        /// <summary>
+        /// 排序 上移
+        /// </summary>
+        /// <param name="PID">项目ID</param>
+        /// <param name="CPID">问题ID</param>
+        /// <returns></returns>
+        public ActionResult SortUP(int sort,  int PID)
+        {
+            ProjectModel cpmodel = new ProjectModel();
+            cpmodel.SortUpOrDown(1, sort,LoginAccount.EnterpriseID, PID);
+            return RedirectToAction("Index", "Project");
+        }
+
+        /// <summary>
+        /// 排序 下移
+        /// </summary>
+        /// <param name="PID">项目ID</param>
+        /// <param name="CPID">问题ID</param>
+        /// <returns></returns>
+        public ActionResult SortDown(int sort,int PID)
+        {
+            ProjectModel cpmodel = new ProjectModel();
+            cpmodel.SortUpOrDown(2, sort, LoginAccount.EnterpriseID, PID);
+            return RedirectToAction("Index", "Project");
+        }
+
 
         [HttpPost]
         public JsonResult UpImg()
@@ -92,7 +144,7 @@ namespace ProjectShow.Controllers
             {
                 var f = Request.Files[0];
                 string path = "/File/Enterprise/" + LoginAccount.EnterpriseID + "/" + DateTime.Now.ToString("yyyy-MM-dd");
-                string fileName = "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + f.FileName; 
+                string fileName = "/" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + f.FileName;
                 string TempPath = Server.MapPath(path);
                 if (Directory.Exists(TempPath) == false)
                 {

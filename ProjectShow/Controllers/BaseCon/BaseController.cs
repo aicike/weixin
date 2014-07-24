@@ -16,11 +16,11 @@ namespace System.Web.Mvc
             string str = "";
             if (dialog.HasError)
             {
-                str = string.Format("jMessage('{0}',false)", dialog.Error);
+                str = string.Format("JMessage('{0}',false)", dialog.Error);
             }
             else
             {
-                str = string.Format("jMessage('{0}')",dialog.Error);
+                str = string.Format("JMessage('{0}')", dialog.Error);
             }
             return JavaScript(str);
         }

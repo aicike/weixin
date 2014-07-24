@@ -49,7 +49,10 @@ namespace Entity
         public int EnterpriseID { get; set; }
         public virtual Enterprise Enterprise { get; set; }
 
-
+        /// <summary>
+        /// 排序
+        /// </summary>
+        public int sort { get; set; }
 
         public virtual ICollection<ImageInfo> ImageInfos { get; set; }
 
@@ -57,6 +60,8 @@ namespace Entity
         public virtual ICollection<CProblem> CProblem { get; set; }
 
         public virtual ICollection<CustomerInfo> CustomerInfo { get; set; }
+
+        public virtual ICollection<New> News { get; set; }
 
     }
 }

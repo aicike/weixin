@@ -50,6 +50,7 @@
     <Compile Include="Enum\EnumCProblemProblemType.cs" />
     <Compile Include="EUser.cs" />
     <Compile Include="ImageInfo.cs" />
+    <Compile Include="New.cs" />
     <Compile Include="_Json_Problem_Option.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Session\AccountSession.cs" />
