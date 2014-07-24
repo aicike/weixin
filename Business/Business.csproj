@@ -41,6 +41,7 @@
       <HintPath>..\packages\QrCode.Net 0.4 Pre-Release\Gma.QrCodeNet.Encoder\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
@@ -64,7 +65,7 @@
     <Compile Include="EnterpriseModel.cs" />
     <Compile Include="EUserModel.cs" />
     <Compile Include="ImageInfoModel.cs" />
-    <Compile Include="ProjectModel.cs" />    
+    <Compile Include="ProjectModel.cs" />
     <Compile Include="Common\ToolImage.cs" />
     <Compile Include="Common\ExpandMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

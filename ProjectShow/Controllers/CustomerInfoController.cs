@@ -25,7 +25,11 @@ namespace ProjectShow.Controllers
             ViewBag.PID = PID;
             ViewBag.Title = "客户信息 - " + project.PName;
             ViewBag.ProjectName = project.PName;
-            return View();
+            CustomerInfoModel customerInfoModel= new CustomerInfoModel();
+            var dt = customerInfoModel.getDtInfo(PID,LoginAccount.EnterpriseID);
+
+
+            return View(dt);
         }
 
         /// <summary>
@@ -35,16 +39,41 @@ namespace ProjectShow.Controllers
         /// <returns></returns>
         public ActionResult ExportExcel(int PID)
         {
-            DataTable dt = new DataTable();
+            ProjectModel projectmodel = new ProjectModel();
+            var project = projectmodel.Get(PID);
             List<DataTable> dts = new List<DataTable>();
-            dt.Columns.Add("www");
-            DataRow row = dt.NewRow();
-            row["www"] = "aaaaaaaa";
-            dt.Rows.Add(row);
+            CustomerInfoModel customerInfoModel = new CustomerInfoModel();
+            var dt = customerInfoModel.getDtInfo(PID, LoginAccount.EnterpriseID);
             dts.Add(dt);
             Common com = new Common();
-            string file = Server.MapPath("/File/Excel/")+"sss.xml";
-            com.Export(dts, "测试文件", file);
+            string fileName = project.PName + "用户信息" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".xlsx";
+            string file = Server.MapPath("/File/Excel/") + fileName;
+            com.Export(dts, "用户信息", file);
+
+        
+
+            FileStream fs = new FileStream(file, FileMode.Open);
+
+            byte[] bytes = new byte[(int)fs.Length];
+
+            fs.Read(bytes, 0, bytes.Length);
+
+            fs.Close();
+
+            Response.ContentType = "application/octet-stream";
+
+            //通知浏览器下载文件而不是打开 
+
+            Response.AddHeader("Content-Disposition", "attachment;  filename=" + HttpUtility.UrlEncode(fileName, Encoding.UTF8));
+
+            Response.BinaryWrite(bytes);
+
+            Response.Flush();
+
+            Response.End(); 
+
+
+
             return View();
         }
 

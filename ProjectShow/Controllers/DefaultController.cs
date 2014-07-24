@@ -48,11 +48,10 @@ namespace ProjectShow.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult UpEnterpriseInfo(EnterpriseInfo enterpriseinfo)
+        public ActionResult UpEnterpriseInfo(EnterpriseInfo enterpriseinfo, HttpPostedFileBase LogoImagePathFile)
         {
             EnterpriseInfoModel einfoModel = new EnterpriseInfoModel();
             var einfo = einfoModel.GetInfo_byEnterpriseID(LoginAccount.EnterpriseID);
-            einfo.Logo = enterpriseinfo.Logo;
             einfo.SName = enterpriseinfo.SName;
             einfoModel.Edit(einfo);
             return RedirectToAction("Index", "Default");
@@ -79,11 +78,10 @@ namespace ProjectShow.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult UpBgImage(EnterpriseInfo enterpriseinfo)
+        public ActionResult UpBgImage(EnterpriseInfo enterpriseinfo, HttpPostedFileBase BGImagePathFile)
         {
             EnterpriseInfoModel einfoModel = new EnterpriseInfoModel();
             var einfo = einfoModel.GetInfo_byEnterpriseID(LoginAccount.EnterpriseID);
-            einfo.BgImage = enterpriseinfo.BgImage;
             einfoModel.Edit(einfo);
             return RedirectToAction("Index", "Default");
         }

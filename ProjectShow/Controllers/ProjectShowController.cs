@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Business;
+using Entity;
 
 namespace ProjectShow.Controllers
 {
@@ -69,6 +70,11 @@ namespace ProjectShow.Controllers
         /// <returns></returns>
         public ActionResult ProjectClassList(int PID, int EID)
         {
+            EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
+            var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            //企业简称
+            ViewBag.SName = enterpriseInfo.SName;
+
             ProjectModel projectModel = new ProjectModel();
             var project = projectModel.Get(PID);
             ViewBag.Title = project.PName;
@@ -94,6 +100,10 @@ namespace ProjectShow.Controllers
         /// <returns></returns>
         public ActionResult ProjectInfo(int AID, int PID, int EID)
         {
+            EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
+            var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            //企业简称
+            ViewBag.SName = enterpriseInfo.SName;
             //分享信息
             ViewBag.BgImage = "";
             ViewBag.ShareTitle = "";
@@ -112,8 +122,12 @@ namespace ProjectShow.Controllers
         /// <returns></returns>
         public ActionResult CustomerInfo(int PID, int EID)
         {
+            ViewBag.PID = PID;
+            ViewBag.EID = EID;
             EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
             var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
+            //企业简称
+            ViewBag.SName = enterpriseInfo.SName;
             //分享信息
             ViewBag.BgImage = enterpriseInfo.BgImage;
             ViewBag.ShareTitle =enterpriseInfo.SName+ "留下您的信息";
@@ -121,11 +135,27 @@ namespace ProjectShow.Controllers
             ProjectModel projectModel = new ProjectModel();
             var project = projectModel.Get(PID);
             ViewBag.Title = project.PName;
-
+            //获取问题列表
             CProblemModel cproblemModel = new CProblemModel();
-
-            return View();
+            var cproblem = cproblemModel.GetList_ByPID(PID,EID);
+          
+            return View(cproblem.ToList());
         
+        }
+        /// <summary>
+        /// 客户提交信息页面
+        /// </summary>
+        /// <param name="PID"></param>
+        /// <param name="EID"></param>
+        /// <param name="Answer"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CustomerInfo(int PID, int EID, string Answer)
+        {
+            var Json = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Json_Problem_Answer>>(Answer);
+            CustomerInfoModel customerinfoModel = new CustomerInfoModel();
+            customerinfoModel.AddInfo(PID, EID, Json);
+            return JavaScript("");
         }
 
     }

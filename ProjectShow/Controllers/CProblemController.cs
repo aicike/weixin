@@ -28,7 +28,14 @@ namespace ProjectShow.Controllers
             ViewBag.ProjectName = project.PName;
             ViewBag.Title = "项目/产品 - 留下用户哪些信息 - " + project.PName;
             ViewBag.PID = PID;
-            ViewBag.MaxSort = croblelist.Max(a => a.sort);
+            if (croblelist != null && croblelist.Count()>0)
+            {
+                ViewBag.MaxSort = croblelist.Max(a => a.sort);
+            }
+            else
+            {
+                ViewBag.MaxSort = 0;
+            }
             return View(croblelist);
         }
 

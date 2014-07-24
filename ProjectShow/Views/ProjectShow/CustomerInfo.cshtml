@@ -3,21 +3,184 @@
 }
 @section head
 {
+    <script>
+        $(function () {
+            $("#PathMenu").hide();
+
+           
+
+        });
+
+        function AnswerModel() {
+            var it = new Object;
+            it.CProblemID = 0;
+            it.COptionID = 0;
+            it.CPType = 0;
+            it.Content = "";
+
+            return it;
+        }
+        var items = [];
+        //获取答案
+        function GetAnswer() {
+            items = [];
+            //单选
+            $("input[class='radioInfo']").each(function () {
+                if ($(this).attr("checked")) {
+                    var AM = new AnswerModel();
+                    var str = $(this).val().split('_');
+                    AM.CProblemID = str[1];
+                    AM.CPType = str[0];
+                    AM.COptionID = str[2];
+                    items.push(AM);
+                }
+
+            });
+
+            //多选
+            $("input[class='checkboxInfo']").each(function () {
+                if ($(this).attr("checked")) {
+                    var AM = new AnswerModel();
+                    var str = $(this).val().split('_');
+                    AM.CProblemID = str[1];
+                    AM.CPType = str[0];
+                    AM.COptionID = str[2];
+                    items.push(AM);
+                }
+            });
+
+            //文本
+            var error = 0;
+            $(".txtInfo").each(function () {
+                var AM = new AnswerModel();
+                var str = $(this).attr("id").split('_');
+                AM.CPType = str[0];
+                AM.CProblemID = str[1];
+                AM.Content = $(this).val();
+                items.push(AM);
+                if ($(this).val() == "" || $(this).val() == undefined) {
+                    error++;
+                }
+
+            });
+            if (error > 0) {
+                $("#p_alert").text("请填写文本内容。");
+                $("#popup_a").click();
+                return false;
+            }
+
+            //多文本
+            $(".txtAreaInfo").each(function () {
+                var AM = new AnswerModel();
+                var str = $(this).attr("id").split('_');
+                AM.CPType = str[0];
+                AM.CProblemID = str[1];
+                AM.Content = $(this).val();
+                items.push(AM);
+
+            });
+            var value = JSON.stringify(items);
+            $("#Answer").val(value);
+            $("#p_alert").text("提交成功！感谢您的参与。");
+            $("#popup_a").click();
+            
+        }
+    </script>
     <style>
         .TopDIV
         {
-            background: #8895b4;
+            background: #7a85a2;
             padding: 10px;
-            color:#fff;
-            font-size:14px;
-            line-height:20px;
+            color: #fff;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .MainDiv
+        {
+            padding: 10px;
+            margin-top: 10px;
+            background: #8895b4;
+            color: #fff;
+            font-size: 14px;
+        }
+        .optionTitle
+        {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .optionDIV *
+        {
+        }
+        .ui-checkbox, .ui-radio
+        {
+            margin: 3px 0px;
+        }
+        .txtAreaInfo
+        {
+            height: 100px !important;
+            max-height: 100px !important;
         }
     </style>
 }
-<div data-role="content">
+@model List<Entity.CProblem>
+<div data-role="content" id="insert">
     <div class="TopDIV">
         留下您的信息，将会有专业代表与您联系。并可能享受以下服务.<br />
         1.专业的顾问服务<br />
         2.获赠小礼品
     </div>
+    <div class="MainDiv">
+        @using (Ajax.BeginForm("CustomerInfo", "ProjectShow", new { PID = ViewBag.PID, EID = ViewBag.EID }, new AjaxOptions() { UpdateTargetId = "alert" }))
+        {
+            <input type="hidden" id="Answer" name="Answer" />
+            for (int i = 0; i < Model.Count; i++)
+            {
+                var Option = Model[i].COption.OrderBy(a => a.ID);
+            <div class="optionTitle">
+                @(i + 1).@Model[i].Problem
+            </div>
+            <div class="optionDIV">
+                @if (Model[i].ProblemType == (int)Entity.Enum.EnumCProblemProblemType.Radio)
+                {
+                    foreach (var item in Option)
+                    {
+                    <input type="radio" class="radioInfo" name="@(Model[i].ProblemType)_@(Model[i].ID)"
+                    id="@(Model[i].ID)_@item.ID" value="@(Model[i].ProblemType)_@(Model[i].ID)_@item.ID" />
+                    <label for="@(Model[i].ID)_@item.ID">
+                        @item.Option
+                    </label>
+                    }
+                }
+                else if (Model[i].ProblemType == (int)Entity.Enum.EnumCProblemProblemType.Check)
+                {
+                    foreach (var item in Option)
+                    {
+                    <input type="checkbox" class="checkboxInfo" name="@(Model[i].ProblemType)_@(Model[i].ID)"
+                    id="@(Model[i].ID)_@item.ID" value="@(Model[i].ProblemType)_@(Model[i].ID)_@item.ID" />
+                    <label for="@(Model[i].ID)_@item.ID">
+                        @item.Option
+                    </label>
+                    }
+                }
+                else if (Model[i].ProblemType == (int)Entity.Enum.EnumCProblemProblemType.Text)
+                { 
+                    <input type="text" class="txtInfo" name="@(Model[i].ProblemType)_@(Model[i].ID)"
+                    id="@(Model[i].ProblemType)_@(Model[i].ID)" />
+                }
+                else if (Model[i].ProblemType == (int)Entity.Enum.EnumCProblemProblemType.TextArea)
+                { 
+                    <textarea cols="40" rows="8" name="@(Model[i].ProblemType)_@(Model[i].ID)" class="txtAreaInfo"
+                    onblur="" id="@(Model[i].ProblemType)_@(Model[i].ID)" placeholder="必填内容（200字以内）"></textarea>
+                }
+            </div>
+            }
+        
+            <input type="submit" onclick="return GetAnswer()" value="提交信息" />
+        }
+    </div>
 </div>
+<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" id="popup_a" data-rel="popup" data-position-to="window" style=" display:none"></a>
+<div class="ui-content" id="positionWindow" data-role="popup" data-theme="a">
+<p id="p_alert">提交成功！感谢您的参与。</p>
+</div>
+

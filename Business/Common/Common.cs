@@ -4,15 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using Aspose.Cells;
+using Entity;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Business.Common
 {
     /// <summary>
     /// 公共方法
     /// </summary>
-    public class Common
+    public class Common : EFModel
     {
-
+        public IQueryable<T> SqlQuery<T>(string sql, params object[] parameters)
+        {
+            return Context.Database.SqlQuery<T>(sql, parameters).AsQueryable();
+        }
         #region------创建随机字符窜（不唯一）------------
 
         /// <summary>
@@ -41,6 +47,41 @@ namespace Business.Common
 
         #endregion
 
+
+        #region-----拷贝DataTable数据到数据库表
+        /// <summary>
+        ///  拷贝表格到数据库
+        /// </summary>
+        /// <param name="dt">dt</param>
+        /// <param name="DBTableName">要拷贝到的数据库中的表名</param>
+        /// <returns></returns>
+        public Result CopyDataTableToDB(DataTable dt, string DBTableName)
+        {
+            Result result = new Result();
+
+            string cString = ConfigurationManager.ConnectionStrings["Context"].ToString();
+            using (SqlConnection conn = new SqlConnection(cString))
+            {
+                conn.Open();
+                using (SqlBulkCopy bcp = new SqlBulkCopy(conn))
+                {
+                    bcp.BatchSize = 200000;
+                    bcp.DestinationTableName = DBTableName;
+                    try
+                    {
+                        bcp.WriteToServer(dt);
+                    }
+                    catch (Exception ex)
+                    {
+                        result.HasError = true;
+                        result.Error = ex.Message;
+                    }
+                }
+            }
+            return result;
+        }
+
+        #endregion
 
         #region----------导出excel-------------
         public void Export(List<DataTable> dtList, string title, string path)
@@ -139,7 +180,7 @@ namespace Business.Common
         {
             path = path.Replace("/", @"\");
             path = path.Substring(0, path.LastIndexOf("."));
-            path += ".xls";
+            path += ".xlsx";
             return path;
         }
         #endregion

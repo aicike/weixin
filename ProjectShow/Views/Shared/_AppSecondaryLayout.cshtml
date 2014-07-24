@@ -18,6 +18,10 @@
     <script src="@Url.Content("~/Scripts/EjectOptions/js/jquery.transform.js")" type="text/javascript"></script>
     <link href="@Url.Content("/Scripts/EjectOptions/css/css.css")"  rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/WeixinShare/ShareAssembly.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.validate-vsdoc.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
     <script type="text/javascript">
 
         //判断是否为移动端
@@ -108,7 +112,7 @@
         @RenderBody()
         <div style="text-align: center; height: 30px; background-image: url('/Image/item_line.png');
             background-repeat: repeat-x; padding-top: 10px">
-            ©xxxx 西安斯维尔
+            ©@ViewBag.SName 西安斯维尔
         </div>
     </div>
     <div class="PathInner" id="PathMenu" style="right: 10px; bottom: 10px; position: fixed">
@@ -136,6 +140,10 @@
             <a class="link" href="@Url.Action("ProjectClass", "ProjectShow", new { EID = ViewBag.EID })" title="首页"><span class="item" style="background-image: url(/Scripts/EjectOptions/images/moment_icn_price.png);
                 -moz-transform: rotate(0deg);" data-transform="rotate(0deg)"></span></a>
         </div>
+    </div>
+    <div id="dialog">
+    </div>
+    <div id="alert">
     </div>
 </body>
 </html>

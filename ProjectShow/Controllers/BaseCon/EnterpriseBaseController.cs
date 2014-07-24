@@ -30,7 +30,7 @@ namespace ProjectShow.Controllers.BaseCon
                 filterContext.Result = new RedirectToRouteResult("Default",
                     new RouteValueDictionary{
                         { "controller", "Login" },
-                        { "action", "SystemLogin" }
+                        { "action", "index" }
                 });
                 return;
             }

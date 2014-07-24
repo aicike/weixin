@@ -15,13 +15,16 @@ namespace Entity
             private Session() { }
 
             public const string LoginSystem = "LoginSystem";
-
             public const string LoginAccount = "LoginAccount";
         }
 
         public class Business
         {
             private Business() { }
+
+            public const string FilePath = "/File/Enterprise/{0}";
+            public const string FileTempPath = "/File/Temp";
+
             public const string key = "abcdefgh";
             public const string iv = "12345678";
 
