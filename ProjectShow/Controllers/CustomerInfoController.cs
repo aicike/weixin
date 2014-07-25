@@ -70,8 +70,10 @@ namespace ProjectShow.Controllers
 
             Response.Flush();
 
-            Response.End(); 
+            Response.End();
 
+            Directory.Delete(file);
+            
 
 
             return View();

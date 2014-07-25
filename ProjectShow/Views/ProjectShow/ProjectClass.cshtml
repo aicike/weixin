@@ -89,7 +89,7 @@
         {
             <div class="grid">
                 <a href="@Url.Action("ProjectClassList", "ProjectShow", new { PID = item.ID, EID = ViewBag.EID })" style=" text-decoration:none">
-                    <img src="../../Image/b.jpg" />
+                    <img src="@Url.Content(item.ImageInfos.FirstOrDefault().Path)" />
                 </a>
                 <div class="PnameBg">
                     @item.PName

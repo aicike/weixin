@@ -66,6 +66,7 @@
     <Compile Include="EUserModel.cs" />
     <Compile Include="ImageInfoModel.cs" />
     <Compile Include="NewModel.cs" />
+    <Compile Include="PreviewCntModel.cs" />
     <Compile Include="ProjectModel.cs" />
     <Compile Include="Common\ToolImage.cs" />
     <Compile Include="Common\ExpandMethod.cs" />
