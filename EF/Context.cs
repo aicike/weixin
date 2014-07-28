@@ -14,7 +14,7 @@ namespace EF
         public DbSet<SystemUser> SystemUser { get; set; }
         public DbSet<EnterpriseInfo> EnterpriseInfo { get; set; }
         public DbSet<Project> Project { get; set; }
-
+        public DbSet<PreviewCnt> PreviewCnt { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -25,7 +25,9 @@ namespace ProjectShow.Controllers
             EnterpriseInfoModel einfoModel = new EnterpriseInfoModel();
             var einfo = einfoModel.GetInfo_byEnterpriseID(LoginAccount.EnterpriseID);
             //总预览次数
-            int CountCnt =  einfo.PreviewCnt;
+            PreviewCntModel previewCntModel = new PreviewCntModel();
+
+            int CountCnt = previewCntModel.GetPreviewCnt(LoginAccount.EnterpriseID);
             ViewBag.Count = CountCnt.ToString("n");
             return View(einfo);
         }
@@ -53,7 +55,7 @@ namespace ProjectShow.Controllers
             EnterpriseInfoModel einfoModel = new EnterpriseInfoModel();
             var einfo = einfoModel.GetInfo_byEnterpriseID(LoginAccount.EnterpriseID);
             einfo.SName = enterpriseinfo.SName;
-            einfoModel.Edit(einfo);
+            einfoModel.EditLogo(einfo, LogoImagePathFile);
             return RedirectToAction("Index", "Default");
         }
 
@@ -82,7 +84,7 @@ namespace ProjectShow.Controllers
         {
             EnterpriseInfoModel einfoModel = new EnterpriseInfoModel();
             var einfo = einfoModel.GetInfo_byEnterpriseID(LoginAccount.EnterpriseID);
-            einfoModel.Edit(einfo);
+            einfoModel.EditBGimg(einfo, BGImagePathFile);
             return RedirectToAction("Index", "Default");
         }
 

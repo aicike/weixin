@@ -47,13 +47,12 @@
         
     </style>
 }
+@model Entity.New
 <div data-role="content">
     <div class="MainDIV">
-        <div class="title">项目动态</div>
+        <div class="title">@Model.Title</div>
         <div class="conter">
-             目前，项目已完成1、2、3号宿舍楼及综合楼的装饰工程及安装工程，正进行项目范围范围内综合管线、道路、绿化等配套工程施工，累计完成投资达93.2%。南海联晟土资公司 将全力推进项目进度，抓紧时间进行小区配套工程施工，力争尽快投入使用。
-            <img src="../../Image/a.jpg" /><img src="../../Image/b.jpg" /><img src="../../Image/c.jpg" />
-            
+             @Html.Raw(Model.Content)
          </div>
     </div>
 </div>

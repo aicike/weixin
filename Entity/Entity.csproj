@@ -46,6 +46,7 @@
     <Compile Include="CProblem.cs" />
     <Compile Include="CustomerInfo.cs" />
     <Compile Include="New.cs" />
+    <Compile Include="PreviewCnt.cs" />
     <Compile Include="_DB_CutomerInfoUserList.cs" />
     <Compile Include="_DB_CutomerInfoUserBS.cs" />
     <Compile Include="Enterprise.cs" />

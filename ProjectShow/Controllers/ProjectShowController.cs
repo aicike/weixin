@@ -23,6 +23,7 @@ namespace ProjectShow.Controllers
             //Newtonsoft.Json.JsonConvert.DeserializeObject(s);
             //企业基本信息
             EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
+            
             var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
             //title 标题
             ViewBag.Title = enterpriseInfo.ShareTitle;
@@ -31,6 +32,12 @@ namespace ProjectShow.Controllers
             ViewBag.ShareTitle = enterpriseInfo.ShareTitle;
             ViewBag.ShareRemark = enterpriseInfo.ShareRemark;
             ViewBag.EID = EID;
+
+            //预览次数
+            enterpriseInfoModel.UpPreviewCnt(EID);
+            PreviewCntModel previewCntModel = new PreviewCntModel();
+            previewCntModel.CreateOrAddCnt(EID);
+
             return View(enterpriseInfo);
         }
 
@@ -49,7 +56,7 @@ namespace ProjectShow.Controllers
             ProjectModel projectModel = new ProjectModel();
             var projectlist = projectModel.GetProjectByEID(EID);
             //分享信息
-            ViewBag.BgImage = "";// projectlist.FirstOrDefault().ImageInfos.FirstOrDefault().Path; ;
+            ViewBag.BgImage = "http://www." + SystemConst.WebUrl + Url.Content(projectlist.FirstOrDefault().ImageInfos.FirstOrDefault().Path);
             ViewBag.ShareTitle = enterpriseInfo.SName + " 项目展示";
             ViewBag.ShareRemark = enterpriseInfo.SName + " 项目展示";
             ViewBag.EID = EID;
@@ -61,6 +68,9 @@ namespace ProjectShow.Controllers
                     return RedirectToAction("ProjectClassList", "ProjectShow", new { PID = projectlist.FirstOrDefault().ID, EID = EID });
                 }
             }
+            //预览次数
+            PreviewCntModel previewCntModel = new PreviewCntModel();
+            previewCntModel.CreateOrAddCnt(EID);
             return View(projectlist.ToList());
         }
 
@@ -77,9 +87,12 @@ namespace ProjectShow.Controllers
 
             ProjectModel projectModel = new ProjectModel();
             var project = projectModel.Get(PID);
+            //获取项目图片
+            var projectimgs = project.ImageInfos.ToList();
+            ViewBag.projectimgs = projectimgs;
             ViewBag.Title = project.PName;
             //分享信息
-            ViewBag.BgImage = "";
+            ViewBag.BgImage =  "http://www."+SystemConst.WebUrl+ Url.Content(projectimgs.FirstOrDefault().Path);
             ViewBag.ShareTitle = project.PName;
             ViewBag.ShareRemark = project.PName;
             //菜单信息
@@ -88,30 +101,53 @@ namespace ProjectShow.Controllers
             ViewBag.Lng = project.Lng;
             ViewBag.PName = project.PName;
             ViewBag.MapAddress = project.MapAddress;
+            //软文信息
+            NewModel newModel = new NewModel();
+            var newList = newModel.GetNewByProjectID(PID).ToList();
 
             ViewBag.PID = PID;
             ViewBag.EID = EID;
-            return View();
+            //预览次数
+            PreviewCntModel previewCntModel = new PreviewCntModel();
+            previewCntModel.CreateOrAddCnt(EID);
+
+            return View(newList);
         }
 
         /// <summary>
         /// 详细信息展示页
         /// </summary>
         /// <returns></returns>
-        public ActionResult ProjectInfo(int AID, int PID, int EID)
+        public ActionResult ProjectInfo(int NID, int PID, int EID)
         {
             EnterpriseInfoModel enterpriseInfoModel = new EnterpriseInfoModel();
             var enterpriseInfo = enterpriseInfoModel.GetInfo_byEnterpriseID(EID);
             //企业简称
             ViewBag.SName = enterpriseInfo.SName;
+            //软文信息
+            NewModel newModel = new NewModel();
+            var news = newModel.Get(NID);
             //分享信息
-            ViewBag.BgImage = "";
-            ViewBag.ShareTitle = "";
-            ViewBag.ShareRemark = "";
+            ViewBag.BgImage = "http://www." + SystemConst.WebUrl + Url.Content(news.Image);
+            ViewBag.ShareTitle = news.Title;
+            ViewBag.ShareRemark = news.Title;
+            //菜单信息
+            ProjectModel projectModel = new ProjectModel();
+            var project = projectModel.Get(PID);
+            ViewBag.Phone = project.Phone;
+            ViewBag.Lat = project.Lat;
+            ViewBag.Lng = project.Lng;
+            ViewBag.PName = project.PName;
+            ViewBag.MapAddress = project.MapAddress;
+            
 
             ViewBag.PID = PID;
             ViewBag.EID = EID;
-            return View();
+
+            //预览次数
+            PreviewCntModel previewCntModel = new PreviewCntModel();
+            previewCntModel.CreateOrAddCnt(EID);
+            return View(news);
         }
 
         /// <summary>
@@ -138,7 +174,9 @@ namespace ProjectShow.Controllers
             //获取问题列表
             CProblemModel cproblemModel = new CProblemModel();
             var cproblem = cproblemModel.GetList_ByPID(PID,EID);
-          
+            //预览次数
+            PreviewCntModel previewCntModel = new PreviewCntModel();
+            previewCntModel.CreateOrAddCnt(EID);
             return View(cproblem.ToList());
         
         }

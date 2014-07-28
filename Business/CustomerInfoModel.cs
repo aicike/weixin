@@ -89,7 +89,7 @@ namespace Business
                                             + " where a.EnterpriseID={0} and ProjectID={1}", EID, PID);
             var customerInfo = com.SqlQuery<DB_CutomerInfoUserList>(sqlUserList).ToList();
             //所有用户标识
-            string sqlUser = "select Identification,count(Identification) as cnt from dbo.CustomerInfo group by Identification";
+            string sqlUser = string.Format("select Identification,count(Identification) as cnt from dbo.CustomerInfo where EnterpriseID={0} and ProjectID={1}  group by Identification",EID,PID);
             var userlist = com.SqlQuery<DB_CutomerInfoUserBS>(sqlUser).ToList();
             int cnt = 0;
             //循环用户标识
