@@ -21,7 +21,7 @@ namespace ProjectShow.Controllers
         public ActionResult Index(int? id)
         {
             ProjectModel pmodel = new ProjectModel();
-            var list = pmodel.GetProjectByEID(LoginAccount.EnterpriseID).OrderByDescending(a => a.sort).ToPagedList(id ?? 1, 15);
+            var list = pmodel.GetProjectByEID(LoginAccount.EnterpriseID).OrderByDescending(a => a.sort).ToList();
             ViewBag.Menu = 2;
 
             if (list != null && list.Count() > 0)

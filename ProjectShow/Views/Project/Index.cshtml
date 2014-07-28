@@ -20,7 +20,7 @@
         }
     </style>
 }
-@model PagedList<Entity.Project>
+@model List<Entity.Project>
 <div class="TitleDIV">@Html.ActionLink("添加", "Add", "Project")</div>
 <table class="Tab_list" cellpadding="0" cellspacing="0">
     <tr>
@@ -96,17 +96,3 @@
         </tr>
     }
 </table>
-<div style="margin-top: 20px;">
-    @Html.Pager(Model, new PagerOptions
-   {
-       PageIndexParameterName = "ID",
-       CurrentPagerItemWrapperFormatString = "<span class=\"pagenum_selected\"><a>{0}</a></span>",
-       NumericPagerItemWrapperFormatString = "<span class=\"pagenum\">{0}</span>",
-       NavigationPagerItemWrapperFormatString = "<span class=\"pagenum\">{0}</span>",
-       CssClass = "manage_pages pages",
-       SeparatorHtml = "&nbsp;",
-       AutoHide = false,
-       PageIndexOutOfRangeErrorMessage = "页超出范围。",
-       ShowFirstLast = false
-   })
-</div>

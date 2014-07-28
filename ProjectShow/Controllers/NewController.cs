@@ -99,7 +99,33 @@ namespace ProjectShow.Controllers
             {
                 return Alert(result);
             }
-            return RedirectToAction("Index", "AppAdvertorial");
+            return JavaScript("window.location.href='" + Url.Action("Index", "New", new { projectID = entity.ProjectID }) + "'");
+        }
+
+        /// <summary>
+        /// 排序 上移
+        /// </summary>
+        /// <param name="PID">项目ID</param>
+        /// <param name="CPID">问题ID</param>
+        /// <returns></returns>
+        public ActionResult SortUP(int sort, int newID,int pid)
+        {
+            NewModel newModel = new NewModel();
+            newModel.SortUpOrDown(1, sort, pid, newID);
+            return RedirectToAction("Index", "New", new { projectID = pid });
+        }
+
+        /// <summary>
+        /// 排序 下移
+        /// </summary>
+        /// <param name="PID">项目ID</param>
+        /// <param name="CPID">问题ID</param>
+        /// <returns></returns>
+        public ActionResult SortDown(int sort, int newID, int pid)
+        {
+            NewModel newModel = new NewModel();
+            newModel.SortUpOrDown(2, sort, pid, newID);
+            return RedirectToAction("Index", "New", new { projectID = pid });
         }
     }
 }

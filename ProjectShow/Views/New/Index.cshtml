@@ -61,24 +61,24 @@
                 }
                 else if (item.Sort <= 1)
                 { 
-                    <a  href="@Url.Action("SortUP", "New", new { sort = item.Sort, nid = item.ID })">
+                    <a  href="@Url.Action("SortUP", "New", new { sort = item.Sort, newID = item.ID, pid = ViewBag.PID })">
                         <img src="@Url.Content("/Image/up.png")" title="上移" alt="上移" style="width: 25px" />
                     </a>
                 }
                 else if (item.Sort == ViewBag.MaxSort)
                 {
-                    <a href="@Url.Action("SortDown", "New", new { sort = item.Sort, nid = item.ID })">
+                    <a href="@Url.Action("SortDown", "New", new { sort = item.Sort, newID = item.ID, pid = ViewBag.PID })">
                         <img src="@Url.Content("/Image/down.png")" title="下移" alt="下移" style="width: 25px" />
                     </a>
                 }
                 else
                 {
                          
-                    <a href="@Url.Action("SortUP", "New", new { sort = item.Sort, nid = item.ID })">
+                    <a href="@Url.Action("SortUP", "New", new { sort = item.Sort, newID = item.ID, pid = ViewBag.PID })">
                         <img src="@Url.Content("/Image/up.png")" title="上移" alt="上移" style="width: 25px; " />
                     </a>
                     <br />
-                    <a  href="@Url.Action("SortDown", "New", new { sort = item.Sort, nid = item.ID })">
+                    <a  href="@Url.Action("SortDown", "New", new { sort = item.Sort, newID = item.ID, pid = ViewBag.PID })">
                         <img src="@Url.Content("/Image/down.png")" title="下移" alt="下移" style="width: 25px;" />
                     </a>
                 }

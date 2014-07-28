@@ -131,21 +131,6 @@
 				},
             }
         });
-
-        $('#imgShow').Jcrop({
-            onChange: updatePreview,
-            onSelect: updatePreview,
-            aspectRatio: 2,
-            setSelect: [0, 0, 200, 200]
-        }, function () {
-            // Use the API to get the real image size
-            var bounds = this.getBounds();
-            boundx = bounds[0];
-            boundy = bounds[1];
-            // Store the API in the jcrop_api variable
-            jcrop_api = this;
-            updatePreview(tempC);
-        });
         uploader.init();
     });
 
@@ -177,9 +162,9 @@
     }
 </style>
 <div class="Div_Title">
-    资讯管理 -> 添加资讯
+    资讯管理 -> 修改资讯
 </div>
-@using (Ajax.BeginForm("Add", "New", new { PID = ViewBag.PID }, new AjaxOptions() { UpdateTargetId = "alert" }, new { enctype = "multipart/form-data" }))
+@using (Ajax.BeginForm("Edit", "New", new AjaxOptions() { UpdateTargetId = "alert" }, new { enctype = "multipart/form-data" }))
 {
     <table class="Tab_info" cellpadding="0" cellspacing="0">
         <tr>
@@ -187,7 +172,7 @@
                 <span>*</span> 标题：
             </td>
             <td>
-                @Html.TextBoxFor(a => a.Title)
+                @Html.TextBoxFor(a => a.Title)@Html.HiddenFor(a=>a.ID)@Html.HiddenFor(a => a.ProjectID)@Html.HiddenFor(a => a.Sort)@Html.HiddenFor(a => a.ViewCount)
             </td>
             <td>@Html.ValidationMessageFor(a => a.Title)
             </td>
@@ -198,7 +183,7 @@
             </td>
             <td colspan="2">
                 <img id="imgShow" style="max-width: 300px; max-height: 300px; border: 1px solid #d0d0d0;" src="@Url.Content(Model.Image)" />
-                @Html.HiddenFor(a => a.Image)<input type="hidden" name="hidImage" id="hidImage" /><div
+                @Html.HiddenFor(a => a.Image)<input type="hidden" name="oldImage" id="oldImage" value="@Model.Image" /><input type="hidden" name="hidImage" id="hidImage" /><div
                     style="display: none">
                     X1
                     <input type="text" size="4" id="x1" name="x1" value="0" />
