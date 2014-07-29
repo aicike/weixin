@@ -89,7 +89,7 @@
             </td>
             <td class="Operation">
                 @Html.ActionLink("修改", "Edit", "Project", new { id = item.ID }, null)
-                @Ajax.ActionLink("删除", "Delete", "Project", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "Project", new { id = item.ID }) + "',null)" })
+                @Ajax.ActionLink("删除", "Delete", new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "if (confirm('你确定要删除吗')) { window.location.href='" + Url.Action("Delete", "Project", new { id = item.ID}) + "'; }" })
                 <br />
                 @Html.ActionLink("你想留下客户哪些信息", "Index", "CProblem", new { PID = item.ID }, null)
             </td>

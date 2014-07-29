@@ -36,7 +36,7 @@ namespace Business
 
         public int GetPreviewCnt(int EID)
         {
-            var item = List().Where(a=>a.EID==EID).FirstOrDefault().Cnt;
+            var item = List().Where(a=>a.EID==EID).Select(a=>a.Cnt).FirstOrDefault();
             return item;
         }
     }

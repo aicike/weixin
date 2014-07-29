@@ -137,5 +137,20 @@ namespace Business
             }
             return result;
         }
+
+        public Result Delete(int id, int pid)
+        {
+            Result result = new Result();
+            try
+            {
+                string sql = string.Format("DELETE dbo.New WHERE ID={0} AND ProjectID={1}",id, pid);
+                base.SqlExecute(sql);
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex.Message;
+            }
+            return result;
+        }
     }
 }

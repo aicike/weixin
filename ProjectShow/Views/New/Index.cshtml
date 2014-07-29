@@ -30,9 +30,6 @@
         <th style="width: 160px;">
             标题
         </th>
-        <th style="width: 45px;">
-            浏览数
-        </th>
         <th>
             排序
         </th>
@@ -51,9 +48,6 @@
             </td>
             <td>
                 @item.Title
-            </td>
-            <td>
-                @item.ViewCount
             </td>
             <td>
                 @if (Model.Count() == 1)
@@ -88,7 +82,7 @@
             </td>
             <td class="Operation">
                 @Html.ActionLink("修改", "Edit", "New", new { id = item.ID }, null)
-                @Ajax.ActionLink("删除", "Delete", "New", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "New", new { id = item.ID }) + "',null)" })
+                @Ajax.ActionLink("删除", "Delete", new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "if (confirm('你确定要删除吗')) { window.location.href='" + Url.Action("Delete", "New", new { id = item.ID, pid=ViewBag.PID }) + "'; }" })
             </td>
         </tr>
     }

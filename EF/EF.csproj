@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="Mapping\NewMap.cs" />
+    <Compile Include="Mapping\ImageInfoMap.cs" />
+    <Compile Include="Migrations\201407290707529_update.cs" />
+    <Compile Include="Migrations\201407290707529_update.Designer.cs">
+      <DependentUpon>201407290707529_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +66,11 @@
       <Project>{D0CD42FD-CBA0-4337-98E7-E3E430C3AD36}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201407290707529_update.resx">
+      <DependentUpon>201407290707529_update.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

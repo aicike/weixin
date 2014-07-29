@@ -127,5 +127,17 @@ namespace ProjectShow.Controllers
             newModel.SortUpOrDown(2, sort, pid, newID);
             return RedirectToAction("Index", "New", new { projectID = pid });
         }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="CPID"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int id,int pid)
+        {
+            NewModel newModel = new NewModel();
+            newModel.Delete(id, pid);
+            return RedirectToAction("Index", "New");
+        }
     }
 }

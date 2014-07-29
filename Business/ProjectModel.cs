@@ -13,6 +13,21 @@ namespace Business
             return List().Where(a => a.EnterpriseID == eid);
         }
 
+        public Result Delete(int pid, int eid)
+        {
+            Result result = new Result();
+            try
+            {
+                string sql = string.Format("DELETE dbo.Project WHERE ID={0} AND EnterpriseID={1}", pid, eid);
+                base.SqlExecute(sql);
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex.Message;
+            }
+            return result;
+        }
+
         public Result Edit(Project entity, List<ImageInfo> images)
         {
             string sql = "DELETE dbo.ImageInfo WHERE ProjectID=" + entity.ID;
@@ -20,7 +35,7 @@ namespace Business
             {
                 foreach (var item in images)
                 {
-                    sql +=string.Format( " INSERT INTO dbo.ImageInfo (Path, ProjectID) VALUES ('{0}',{1})",item.Path,entity.ID);
+                    sql += string.Format(" INSERT INTO dbo.ImageInfo (Path, ProjectID) VALUES ('{0}',{1})", item.Path, entity.ID);
                 }
             }
             base.SqlExecute(sql);
@@ -51,7 +66,7 @@ namespace Business
         /// <param name="type">1 上移，2下移</param>
         /// <param name="sort">当前排序</param>
         /// <returns></returns>
-        public Result SortUpOrDown(int type, int sort,int EnterpriseID, int PID)
+        public Result SortUpOrDown(int type, int sort, int EnterpriseID, int PID)
         {
             Result result = new Result();
             string sql = "";
@@ -67,7 +82,7 @@ namespace Business
             else
             {
                 sql = string.Format("update Project set sort = {0} where EnterpriseID={1} and sort={2} ", sort, EnterpriseID, sort - 1);
-                sql2 = string.Format("update Project set sort = {0} where ID={1} ", sort -1, PID);
+                sql2 = string.Format("update Project set sort = {0} where ID={1} ", sort - 1, PID);
                 base.SqlExecute(sql + " " + sql2);
             }
             return result;

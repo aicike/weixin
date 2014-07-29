@@ -159,7 +159,6 @@ namespace ProjectShow.Controllers
                 }
                 else
                 {
-                    //return "({'jsonrpc' : '2.0', 'error' : {'code': 103, 'message': '文件上传失败。'}, 'id' : 'id'})";
                     return Json(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
                 }
             }
@@ -167,6 +166,18 @@ namespace ProjectShow.Controllers
             {
                 return Json(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
             }
+        }
+
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="CPID"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int id)
+        {
+            ProjectModel pmodel = new ProjectModel();
+            pmodel.Delete(id, LoginAccount.EnterpriseID);
+            return RedirectToAction("Index", "Project");
         }
     }
 }
