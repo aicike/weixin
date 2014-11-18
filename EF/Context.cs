@@ -23,11 +23,11 @@ namespace EF
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
 
-            //modelBuilder.Configurations.Add(new NewMap());
-            //modelBuilder.Configurations.Add(new ImageInfoMap());
-            //modelBuilder.Configurations.Add(new COptionMap());
-            //modelBuilder.Configurations.Add(new CProblemMap());
-            //modelBuilder.Configurations.Add(new CustomerInfoMap());
+            modelBuilder.Configurations.Add(new NewMap());
+            modelBuilder.Configurations.Add(new ImageInfoMap());
+            modelBuilder.Configurations.Add(new COptionMap());
+            modelBuilder.Configurations.Add(new CProblemMap());
+            modelBuilder.Configurations.Add(new CustomerInfoMap());
         }
     }
 }

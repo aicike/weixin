@@ -13,7 +13,7 @@ namespace EF.Mapping
         {
             this.HasRequired(a => a.Project)
             .WithMany(a => a.CustomerInfo)
-            .HasForeignKey(a => a.ProjectID).WillCascadeOnDelete(true);
+            .HasForeignKey(a => a.ProjectID).WillCascadeOnDelete(false);
 
             this.HasRequired(a => a.CProblem)
             .WithMany(a => a.CustomerInfo)
