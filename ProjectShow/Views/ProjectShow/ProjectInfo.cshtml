@@ -1,5 +1,4 @@
 ﻿@{
-    ViewBag.Title = "ProjectInfo";
     Layout = "~/Views/Shared/_AppSecondaryLayout.cshtml";
 }
 @section head{
@@ -46,6 +45,14 @@
        
         
     </style>
+    <script>
+        $(function () {
+            $(".conter").find("img").click(function () {
+                var url = $(this).attr("src");
+                window.location.href = url;
+            });
+        });
+    </script>
 }
 @model Entity.New
 <div data-role="content">

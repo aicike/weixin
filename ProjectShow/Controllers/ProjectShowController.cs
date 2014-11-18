@@ -28,7 +28,7 @@ namespace ProjectShow.Controllers
             //title 标题
             ViewBag.Title = enterpriseInfo.ShareTitle;
             //分享信息
-            ViewBag.BgImage = enterpriseInfo.BgImage;
+            ViewBag.BgImage = "http://www." + SystemConst.WebUrl + enterpriseInfo.BgImage;
             ViewBag.ShareTitle = enterpriseInfo.ShareTitle;
             ViewBag.ShareRemark = enterpriseInfo.ShareRemark;
             ViewBag.EID = EID;
@@ -54,7 +54,7 @@ namespace ProjectShow.Controllers
             //title 标题
             ViewBag.Title = enterpriseInfo.SName;
             ProjectModel projectModel = new ProjectModel();
-            var projectlist = projectModel.GetProjectByEID(EID);
+            var projectlist = projectModel.GetProjectByEID(EID).OrderByDescending(a => a.sort);
             //分享信息
             ViewBag.BgImage = "http://www." + SystemConst.WebUrl + Url.Content(projectlist.FirstOrDefault().ImageInfos.FirstOrDefault().Path);
             ViewBag.ShareTitle = enterpriseInfo.SName + " 项目展示";
@@ -103,7 +103,7 @@ namespace ProjectShow.Controllers
             ViewBag.MapAddress = project.MapAddress;
             //软文信息
             NewModel newModel = new NewModel();
-            var newList = newModel.GetNewByProjectID(PID).ToList();
+            var newList = newModel.GetNewByProjectID(PID).OrderByDescending(a=>a.Sort).ToList();
 
             ViewBag.PID = PID;
             ViewBag.EID = EID;

@@ -23,6 +23,7 @@ namespace ProjectShow
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception unhandledException = Server.GetLastError();
+            Response.Redirect("/Error.htm");
         }
          
     }

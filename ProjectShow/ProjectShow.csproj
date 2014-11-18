@@ -132,17 +132,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Error.htm" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Image\a.jpg" />
     <Content Include="Image\AppDefault.png" />
-    <Content Include="Image\b.jpg" />
     <Content Include="Image\bg1.jpg" />
     <Content Include="Image\bg2.gif" />
     <Content Include="Image\body-bkg.png" />
-    <Content Include="Image\c.jpg" />
     <Content Include="Image\close.png" />
-    <Content Include="Image\d.jpg" />
     <Content Include="Image\down.png" />
     <Content Include="Image\hdr-bkg.png" />
     <Content Include="Image\item_line.png" />
@@ -573,7 +570,9 @@
     <Content Include="Scripts\wowwindow\css\images\wowwindow-loading.gif" />
     <Content Include="Scripts\wowwindow\css\wowwindow.css" />
     <Content Include="Scripts\wowwindow\js\jquery.wowwindow.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -709,7 +708,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
