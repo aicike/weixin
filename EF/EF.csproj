@@ -50,15 +50,18 @@
     <Compile Include="Context.cs" />
     <Compile Include="Mapping\NewMap.cs" />
     <Compile Include="Mapping\ImageInfoMap.cs" />
-    <Compile Include="Migrations\201407290707529_update.cs" />
-    <Compile Include="Migrations\201407290707529_update.Designer.cs">
-      <DependentUpon>201407290707529_update.cs</DependentUpon>
+    <Compile Include="Mapping\CProblemMap.cs" />
+    <Compile Include="Mapping\COptionMap.cs" />
+    <Compile Include="Migrations\201407300429599_Update.cs" />
+    <Compile Include="Migrations\201407300429599_Update.Designer.cs">
+      <DependentUpon>201407300429599_Update.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="Mapping\CustomerInfoMap.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -68,8 +71,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407290707529_update.resx">
-      <DependentUpon>201407290707529_update.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201407300429599_Update.resx">
+      <DependentUpon>201407300429599_Update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

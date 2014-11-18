@@ -27,7 +27,7 @@ namespace EF
             modelBuilder.Configurations.Add(new ImageInfoMap());
             modelBuilder.Configurations.Add(new COptionMap());
             modelBuilder.Configurations.Add(new CProblemMap());
-            modelBuilder.Configurations.Add(new ImageInfoMap());
+            modelBuilder.Configurations.Add(new CustomerInfoMap());
         }
     }
 }
